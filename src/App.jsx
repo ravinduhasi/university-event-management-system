@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Footer from './assets/pages/Footer';
 
 export default function App() {
   return (
     <div>
-      <h1 className='text-3xl font-bold'>Hello World</h1>
+      <Footer />
     </div>
   )
 }
