@@ -15,6 +15,7 @@ import gaval from "../images/gavel.jpg";
 import ieee from "../images/ieee.jpg";
 import net from "../images/net.jpg";
 import Blog from "../pages/Blog"
+import Footer from "./Footer";
 
 const Home = () => {
     // Array of image URLs
@@ -124,6 +125,7 @@ const Home = () => {
                 className="px-5 py-16 font-mono text-4xl font-bold text-center text-black">UPCOMING EVENTS AND BOOKINGS...</motion.h1>
 
             </div>
+            <Footer/>
         </>
     );
 };
