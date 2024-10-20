@@ -4,6 +4,7 @@ import Home from "./assets/pages/Home";
 import About from "./assets/pages/About";
 import Skills from "./assets/pages/Skills";
 import Contact from "./assets/pages/Contact";
+import AuthPage from "./assets/pages/SigninAndSignup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/SignUp" element={<AuthPage />} />
 
          
         </Routes>
