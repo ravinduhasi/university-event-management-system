@@ -1,8 +1,9 @@
 import React from 'react';
-import home from './samurai.jpg';
+import home from '../images/samurai.jpg';
 
 const Blog = () => {
     return (
+        
         <div className='px-20  py-6  bg-[#ffffff4e] h-full'>
                 <div className='container'>
                     <div className='mb-5 text-center max-w-[600px]  mx-auto '>
@@ -97,7 +98,9 @@ const Blog = () => {
                         </div>
                     </div>
                 </div>
-        </div>
+                
+        </div> 
+        
     );
 };
 
