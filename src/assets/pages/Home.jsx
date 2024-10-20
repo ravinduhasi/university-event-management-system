@@ -49,7 +49,7 @@ const Home = () => {
                     />
                 </div>
             </section>
-            <div className="h-[140vh] bg-[#00000017]">
+            <div className="h-[150vh] bg-[#00000017]">
                 <div>
                     <motion.h1
                     variants={fadeIn("up", 0.3)}
