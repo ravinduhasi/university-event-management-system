@@ -7,10 +7,6 @@ import Contact from "./assets/pages/Contact";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-import React from 'react';
-import Log from './assets/pages/SigninAndSignup';
-
-export default function App() {
   return (
     <>
       <Router>
@@ -31,9 +27,4 @@ export default function App() {
   );
 }
 
-
-    <div>
-      <Log />
-    </div>
-  )
-}
+export default App;
