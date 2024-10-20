@@ -14,6 +14,7 @@ import rayon from "../images/rayon.jpg";
 import gaval from "../images/gavel.jpg";
 import ieee from "../images/ieee.jpg";
 import net from "../images/net.jpg";
+import Blog from "../pages/Blog"
 
 const Home = () => {
     // Array of image URLs
@@ -112,7 +113,7 @@ const Home = () => {
 
 
             </div>
-
+            <Blog />
             <div>
                 <motion.h1
                 variants={fadeIn("up", 0.3)}
