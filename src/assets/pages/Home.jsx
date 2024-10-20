@@ -55,7 +55,7 @@ const Home = () => {
                     variants={fadeIn("up", 0.3)}
                     initial="hidden"
                     whileInView={"show"}
-                    viewport={{ once: false, amount: 0.7 }}
+                    viewport={{ once: false, amount: 0.7}}
 
                     
                     className="px-5 py-24 font-mono text-4xl font-bold text-center text-black">UNIVERSITY CLUBS...</motion.h1>
