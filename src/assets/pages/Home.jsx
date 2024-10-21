@@ -52,18 +52,25 @@ const Home = () => {
             <div className="h-[150vh] bg-[#00000017]">
                 <div>
                     <motion.h1
-                    variants={fadeIn("up", 0.3)}
-                    initial="hidden"
-                    whileInView={"show"}
-                    viewport={{ once: false, amount: 0.7}}
-
+                    initial={{y: 50,opacity: 0}}
+                    whileInView={{y:0,opacity: 1}}
+                    transition={{
+                        delay: 0.4,
+                        y: {type: "spring", stiffness: 60},
+                        opacity: {duration: 0.2},
+                        ease: "easeIn",
+                        duration: 1,}}
                     
                     className="px-5 py-24 font-mono text-4xl font-bold text-center text-black">UNIVERSITY CLUBS...</motion.h1>
                     <motion.div
-                    variants={fadeIn("up", 0.3)}
-                    initial="hidden"
-                    whileInView={"show"}
-                    viewport={{ once: false, amount: 0.7 }}
+                    initial={{y: 50,opacity: 0}}
+                    whileInView={{y:0,opacity: 1}}
+                    transition={{
+                        delay: 0.4,
+                        y: {type: "spring", stiffness: 60},
+                        opacity: {duration: 0.2},
+                        ease: "easeIn",
+                        duration: 1,}}
                     
                     className="flex justify-center m-12 mt-2 space-x-20">
                         <div className="w-[250px] h-[300px] bg-[#00000025] rounded-[30px] border-2 border-black transition duration-150 hover:scale-105 cursor-pointer">
@@ -85,10 +92,14 @@ const Home = () => {
                     </motion.div>
 
                     <motion.div
-                    variants={fadeIn("up", 0.3)}
-                    initial="hidden"
-                    whileInView={"show"}
-                    viewport={{ once: false, amount: 0.7 }}
+                    initial={{y: 50,opacity: 0}}
+                    whileInView={{y:0,opacity: 1}}
+                    transition={{
+                        delay: 0.4,
+                        y: {type: "spring", stiffness: 60},
+                        opacity: {duration: 0.2},
+                        ease: "easeIn",
+                        duration: 1,}}
                     
                     className="flex justify-center py-10 m-12 space-x-20">
                         <div className="w-[250px] h-[300px] bg-[#00000025] rounded-[30px] border-2 border-black transition duration-150 hover:scale-105 cursor-pointer">
