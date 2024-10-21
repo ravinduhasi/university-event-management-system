@@ -6,7 +6,7 @@ import { fadeIn } from "../../variants";
 import image1 from "../images/image1.jpg";
 import image2 from "../images/image2.jpg";
 import image3 from "../images/image3.jpg";
-import union from "../images/union.jpg";
+import union from "../images/union.png";
 import leo from "../images/leo.jpg";
 import rotract from "../images/rotract.jpg";
 import art from "../images/art.jpg";
