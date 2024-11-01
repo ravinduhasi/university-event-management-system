@@ -14,7 +14,7 @@ import rayon from "../images/rayon.jpg";
 import gaval from "../images/gavel.jpg";
 import ieee from "../images/ieee.jpg";
 import net from "../images/net.jpg";
-import Blog from "../pages/Blog"
+import Blog from "../pages/Blog";
 import Footer from "./Footer";
 
 const Home = () => {
