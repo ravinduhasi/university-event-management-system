@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 //motion
 import { motion } from "framer-motion";
 //variants
-import { fadeIn } from "../../variants";
-import image1 from "../images/image1.jpg";
-import image2 from "../images/image2.jpg";
-import image3 from "../images/image3.jpg";
-import union from "../images/union.png";
-import leo from "../images/leo.jpg";
-import rotract from "../images/rotract.jpg";
-import art from "../images/art.jpg";
-import rayon from "../images/rayon.jpg";
-import gaval from "../images/gavel.jpg";
-import ieee from "../images/ieee.jpg";
-import net from "../images/net.jpg";
-import Blog from "../pages/Blog"
-import Footer from "./Footer";
+import { fadeIn } from "../variants";
+import image1 from "../assets/image1.jpg";
+import image2 from "../assets/image2.jpg";
+import image3 from "../assets/image3.jpg";
+import union from "../assets/union.png";
+import leo from "../assets/leo.jpg";
+import rotract from "../assets/rotract.jpg";
+import art from "../assets/art.jpg";
+import rayon from "../assets/rayon.jpg";
+import gaval from "../assets/gavel.jpg";
+import ieee from "../assets/ieee.jpg";
+import net from "../assets/net.jpg";
+import Blog from "../components/Blog";
+import Footer from "../components/Footer";
 
 const Home = () => {
     // Array of image URLs

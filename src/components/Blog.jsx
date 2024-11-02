@@ -1,5 +1,5 @@
 import React from 'react';
-import home from '../images/samurai.jpg';
+import home from '../assets/images/samurai.jpg';
 
 const Blog = () => {
     return (

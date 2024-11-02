@@ -1,9 +1,9 @@
 import React from "react";
-import fb from '../images/fb.svg'; 
-import twitter from '../images/twitter.svg';
-import linkedin from '../images/linkedin.svg';
-import insta from '../images/insta.svg';
-import img from '../images/fimg.jpg';
+import fb from '../assets/fb.svg'; 
+import twitter from '../assets/twitter.svg';
+import linkedin from '../assets/linkedin.svg';
+import insta from '../assets/insta.svg';
+import img from '../assets/fimg.jpg';
 const Footer = () => {
   return (
     <div className="px-10 py-10 text-white bg-gray-800 md:px-20 lg:px-40">

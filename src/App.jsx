@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "./assets/pages/Navbar";
-import Home from "./assets/pages/Home";
-import About from "./assets/pages/About";
-import Skills from "./assets/pages/Skills";
-import Contact from "./assets/pages/Contact";
-import AuthPage from "./assets/pages/SigninAndSignup";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Skills from "./pages/Skills";
+import Contact from "./pages/Contact";
+import AuthPage from "./pages/SigninAndSignup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
