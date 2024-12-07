@@ -12,7 +12,7 @@ import LogOut from './LogOut';
 
 const Sidebar = () => {
   const menuItems = [
-    { path: "/", label: "Dashboard", icon: <BiHome /> },
+    { path: "", label: "Dashboard", icon: <BiHome /> },
     { path: "/EventContent", label: "Event managers", icon: <BiMessage /> },
     { path: "/UserContent", label: "Users", icon: <BiUser /> },
     { path: "/EventsContent", label: "Event", icon: <BiTask /> },
