@@ -16,8 +16,10 @@ import ieee from "../assets/ieee.jpg";
 import net from "../assets/net.jpg";
 import Blog from "../components/Blog";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
+    
     // Array of image URLs
     const images = [
         image1,
@@ -38,7 +40,9 @@ const Home = () => {
     }, [images.length]);
 
     return (
+        
         <>
+        <Navbar />
             {/* Photo section */}
             <section className="grid grid-cols-1 m-0">
                 <div className="flex justify-center">

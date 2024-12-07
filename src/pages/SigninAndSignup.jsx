@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { auth,db } from './Firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom'; 
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc , getDoc } from "firebase/firestore";
+import Navbar from '../components/Navbar';
 
 
 
@@ -18,34 +19,49 @@ const AuthPage = () => {
 
     const handleSignUp = async () => {
         try {
-            // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
     
-            // Store additional user data in Firestore under the user's UID
+            // Determine the role
+            const role = email === "admin1@gmail.com" || email === "admin2@gmail.com" || email === "admin3@gmail.com" ? "admin" : "user";
+    
+            // Store user data in Firestore
             await setDoc(doc(db, "users", user.uid), {
-                name: name,
-                department: department,
-                phone: phone,
-                email: email
+                name,
+                department,
+                phone,
+                email,
+                role // Save the role
             });
     
             console.log("User signed up and data stored in Firestore:", user);
-            
-            // Toggle to the "Sign In" form after successful sign-up
-            setIsSignUp(false);
+            setIsSignUp(false); // Switch to the sign-in form
         } catch (err) {
             setError(err.message);
         }
     };
     
-    
 
     const handleSignIn = async () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log("User signed in:", userCredential.user);
-            navigate("/skills"); // Redirect to the dashboard or another page after sign-in
+            const user = userCredential.user;
+    
+            // Get user data from Firestore
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+    
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+    
+                // Redirect based on the user's role
+                if (userData.role === "admin") {
+                    navigate("/admin"); // Redirect admins to admin dashboard
+                } else {
+                    navigate("/skills"); // Redirect regular users to skills page
+                }
+            } else {
+                console.error("No user data found in Firestore!");
+            }
         } catch (err) {
             setError(err.message);
         }
@@ -62,7 +78,7 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="flex items-center justify-center w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <><Navbar /><div className="flex items-center justify-center w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
             <div className='w-full max-w-md bg-[#000000] p-8 rounded-[12px] flex flex-col items-center'>
                 <div className='flex flex-col w-full'>
                     <div className='flex flex-col w-full mb-4 text-center'>
@@ -77,54 +93,49 @@ const AuthPage = () => {
 
                     <form onSubmit={handleSubmit} className='flex flex-col w-full'>
                         {isSignUp && (
-                            <input 
+                            <input
                                 type="text"
                                 placeholder="Enter Your Name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]'
-                            />
+                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]' />
                         )}
 
-                        <input 
+                        <input
                             type="email"
                             placeholder="Enter Your Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]'
-                        />
+                            className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]' />
 
                         {isSignUp && (
-                            <input 
+                            <input
                                 type="text"
                                 placeholder="Enter Your Department"
                                 value={department}
                                 onChange={(e) => setDepartment(e.target.value)}
-                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]'
-                            />
+                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]' />
                         )}
 
                         {isSignUp && (
-                            <input 
+                            <input
                                 type="text"
                                 placeholder="Enter Your Number"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]'
-                            />
+                                className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]' />
                         )}
 
-                        <input 
+                        <input
                             type="password"
                             placeholder="Enter Your Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]'
-                        />
+                            className='w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]' />
 
                         <div className='flex items-center justify-between w-full mb-4'>
                             <div className='flex items-center'>
-                                <input type="checkbox" className='w-4 h-4 mr-2'/>
+                                <input type="checkbox" className='w-4 h-4 mr-2' />
                                 <p className='text-sm text-[#7a68689e]'>Remember me</p>
                             </div>
                             {!isSignUp && (
@@ -142,7 +153,7 @@ const AuthPage = () => {
                     <div className='text-center'>
                         <p className='text-sm text-[#ffffff]'>
                             {isSignUp ? "Already have an account?" : "Don't have an account?"}
-                            <span 
+                            <span
                                 className='font-semibold underline cursor-pointer text-[#5d5858] ml-1'
                                 onClick={() => setIsSignUp(!isSignUp)} // Toggle between signup and login
                             >
@@ -152,8 +163,8 @@ const AuthPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div></>
     );
-}
+};
 
 export default AuthPage;

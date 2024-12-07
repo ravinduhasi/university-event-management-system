@@ -1,4 +1,4 @@
-import image1 from '../../assets/image.png';
+import image1 from '../../assets/images/image.png';
 
 const events = [
   {
@@ -69,23 +69,23 @@ const events = [
 const ManagerList = () => {
   return (
     <div className="p-4">
-      <div className="overflow-x-auto max-h-96 overflow-y-scroll">
+      <div className="overflow-x-auto overflow-y-scroll max-h-96">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Image
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Name
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Club
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Manager ID
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> </th>
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"> </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -98,7 +98,7 @@ const ManagerList = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-[#526d82]">{event.club}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-[#526d82]">{event.managerid}</td>
                 
-                <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                   <a href="#" className="text-[#000000] hover:text-[#526d82]">View</a>
                 </td>
               </tr>
