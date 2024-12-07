@@ -8,7 +8,8 @@ const LogOut = () => {
   const handleLogout = () => {
     // Add your logout logic here (e.g., clearing tokens, user data, etc.)
     console.log('User logged out');
-    navigate('/Home'); // Redirect to the home page after logout
+    // Redirect to the home page after logout
+    navigate('/');
   };
 
   return (
