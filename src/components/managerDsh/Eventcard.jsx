@@ -1,26 +1,26 @@
-import Addclub from "../../assets/images/Addclub.png";
-import Updateclub from "../../assets/images/Updateclub.png";
-import Viewclub from "../../assets/images/Viewclub.png";
+import { IoPersonAddSharp } from "react-icons/io5";
+import { FaUserEdit } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 
 const courses = [
   {
-    title: "Add Club",
-    icon: <img src={Addclub} alt="Add Club" className="w-10 h-10" />,
-    description: "Adding club to the system",
+    title: "Add Event",
+    icon: <IoPersonAddSharp className="w-10 h-10" />,
+    description: "Adding Event to the system",
   },
   {
-    title: "Update Club",
-    icon: <img src={Updateclub} alt="Update Club" className="w-10 h-10" />,
-    description: "Updating club details",
+    title: "Update Event",
+    icon: <FaUserEdit className="w-10 h-10" />,
+    description: "Updating Event details",
   },
   {
-    title: "View Club",
-    icon: <img src={Viewclub} alt="View Club" className="w-10 h-10" />,
-    description: "View club details",
+    title: "View Event",
+    icon: <FaUser className="w-10 h-10" />,
+    description: "View Event details",
   },
 ];
 
-const Card = () => {
+const Eventcard = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 cursor-pointer">
       {courses.map((course, index) => (
@@ -48,4 +48,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Eventcard;

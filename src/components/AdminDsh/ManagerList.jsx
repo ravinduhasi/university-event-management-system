@@ -1,4 +1,4 @@
-import image1 from '../../assets/image.png';
+import image1 from '../../assets/images/image.png';
 
 const events = [
   {
