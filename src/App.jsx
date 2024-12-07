@@ -5,7 +5,9 @@ import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import AuthPage from "./pages/SigninAndSignup";
 import ADashboard from "./pages/AdminDsh/AdminDashboard";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import EventContent from "./pages/AdminDsh/ManagerContent";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/SignUp" element={<AuthPage />} />
           <Route path="/admin" element={<ADashboard />} />
+          <Route path="/EventContent" element={<EventContent />} />
 
          
         </Routes>
