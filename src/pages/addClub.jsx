@@ -1,7 +1,8 @@
 import React from 'react'
-
-export const addClub = () => {
+const addClub = () => {
   return (
     <div>addClub</div>
   )
 }
+
+export default addClub
