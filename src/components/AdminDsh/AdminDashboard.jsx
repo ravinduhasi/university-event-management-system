@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Sidebar from './ASidebar';
 import Content from './Content';
@@ -10,10 +10,10 @@ import EventsContent from './EventsContent';
 
 function ADashboard() {
   return (
-    <Router>
-      <div className="flex flex-col md:flex-row gap-5">
+    
+      <div className="flex flex-col gap-5 md:flex-row">
         <Sidebar />
-        <div className="dashboard-content bg-white flex-1 rounded-2xl p-8 gap-6 justify-between">
+        <div className="justify-between flex-1 gap-6 p-8 bg-white dashboard-content rounded-2xl">
           <Routes>
             <Route path="/" element={<Content />} />
             <Route path="/EventContent" element={<ManagerContent />} />
@@ -25,7 +25,7 @@ function ADashboard() {
           </Routes>
         </div>
       </div>
-    </Router>
+    
   );
 }
 
