@@ -1,17 +1,17 @@
 import React from "react";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import AuthPage from "./pages/SigninAndSignup";
+import ADashboard from "./components/AdminDsh/AdminDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
+  
 
         {/* Routes instead of Switch */}
         <Routes>
@@ -21,6 +21,7 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/SignUp" element={<AuthPage />} />
+          <Route path="/admin" element={<ADashboard />} />
 
          
         </Routes>
