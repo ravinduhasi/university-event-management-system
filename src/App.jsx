@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import AuthPage from "./pages/SigninAndSignup";
-import ADashboard from "./components/AdminDsh/AdminDashboard";
+import ADashboard from "./pages/AdminDsh/AdminDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
