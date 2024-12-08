@@ -6,19 +6,16 @@ import ProfileContent from './MprofileContent';
 import HelpContent from './MHelpContent';
 import EventsContent from './EventsContent';
 
-function ADashboard() {
+function MDashboard() {
   return (
     <Router>
       <div className="flex flex-col md:flex-row gap-5">
         <Sidebar />
         <div className="dashboard-content bg-white flex-1 rounded-2xl p-8 gap-6 justify-between">
           <Routes>
-            
             <Route path="/" element={<EventsContent />} />
-            {/* <Route path="/EventContent" element={<EventsContent />} /> */}
             <Route path="/UserContent" element={<UserContent />} />
             <Route path="/ProfileContent" element={<ProfileContent />} />
-            
             <Route path="/HelpContent" element={<HelpContent />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
@@ -28,4 +25,4 @@ function ADashboard() {
   );
 }
 
-export default ADashboard;
+export default MDashboard;

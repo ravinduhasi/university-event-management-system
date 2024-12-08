@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AuthPage from "./pages/SigninAndSignup";
-import LayoutWithSidebar from "./pages/AdminDsh/LayoutWithSidebar";
+import LayoutWithASidebar from "./pages/AdminDsh/LayoutWithASidebar";
+import LayoutWithMSidebar from "./pages/managerDsh/LayoutWithMSidebar";
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
         <Route path="/SignUp" element={<AuthPage />} />
 
         {/* Layout With Sidebar */}
-        <Route path="/admin/*" element={<LayoutWithSidebar />} />
+        <Route path="/admin/*" element={<LayoutWithASidebar />} />
+        <Route path="/manager/*" element={<LayoutWithMSidebar />} />
+
+        
       </Routes>
     </Router>
   );

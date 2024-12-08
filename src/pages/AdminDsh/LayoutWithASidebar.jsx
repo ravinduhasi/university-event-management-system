@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ASidebar from "./ASidebar";
 import Content from "./Content";
 
-const LayoutWithSidebar = () => {
+const LayoutWithASidebar = () => {
   const [activeContent, setActiveContent] = useState(<Content />);
 
   return (
@@ -15,4 +15,4 @@ const LayoutWithSidebar = () => {
   );
 };
 
-export default LayoutWithSidebar;
+export default LayoutWithASidebar;

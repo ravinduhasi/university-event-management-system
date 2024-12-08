@@ -35,7 +35,7 @@ const ASidebar = ({ setActiveContent }) => {
       <div
         className="text-center px-3 py-10 text-[#27374d] flex items-center gap-5 cursor-pointer"
         onClick={() => {
-          navigate("/"); // Navigate to the home page
+          navigate("/"); 
           setActiveItem("Dashboard"); // Reset the active item to Dashboard
           setActiveContent(<Content />); // Set the content to Dashboard's content
         }}
