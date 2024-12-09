@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import AuthPage from "./pages/SigninAndSignup";
 import LayoutWithASidebar from "./pages/AdminDsh/LayoutWithASidebar";
 import LayoutWithMSidebar from "./pages/managerDsh/LayoutWithMSidebar";
+import LayoutWithUSidebar from "./pages/UserDsh/LayoutWithUSidebar";
 import { AddManager } from "./pages/AddManager";
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
 
         {/* Manager Dashboard */}
         <Route path="/manager/*" element={<LayoutWithMSidebar />} />
+
+        {/* User Dashboard */}
+        <Route path="/user/*" element={<LayoutWithUSidebar />} />
       </Routes>
     </Router>
   );
