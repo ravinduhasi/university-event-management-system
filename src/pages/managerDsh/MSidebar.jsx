@@ -24,7 +24,7 @@ const MSidebar = ({ setActiveContent }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-10 h-[94vh] pl-5 bg-gray-100">
+    <div className="flex flex-col gap-10 h-[94vh] pl-5 bg-gray-100 p-8">
       {/* Header */}
       <div
         className="text-center px-3 py-10 text-[#27374d] flex items-center gap-5 cursor-pointer"
