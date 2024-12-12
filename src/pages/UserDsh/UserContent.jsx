@@ -1,15 +1,14 @@
 import UserList from "./UserList";
-import UserCard from "./UserCard";
 import UserHeader from "./UserHeader";
+import Booking from "./Parking";
 
 function UserContent() {
   return (
     <div className="w-full">
       <UserHeader />
-      
-        <div className="flex flex-col gap-4">
-          <UserCard />      
+        <div className=" h-full flex-col gap-4">
           <UserList />
+          <Booking />
         </div>
       </div>
     

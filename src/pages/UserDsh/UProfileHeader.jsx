@@ -6,7 +6,7 @@ const ProfileHeader = () => {
       <div className="bg-white rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-6xl min-h-[600px]">
         {/* Left Section: Profile Card */}
         <div className="p-8 flex flex-col items-center border-b md:border-b-0 md:border-r border-gray-300 gap-y-5">
-          <h2 className="text-xl font-semibold mb-6">MANAGER PROFILE</h2>
+          <h2 className="text-xl font-semibold mb-6">User PROFILE</h2>
           <img
             src="https://via.placeholder.com/150"
             alt="Profile"

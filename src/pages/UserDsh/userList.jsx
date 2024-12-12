@@ -107,7 +107,7 @@ const UserList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                   <a href="#" className="text-[#000000] hover:text-[#526d82]">
-                    Edit
+                    Booking
                   </a>
                 </td>
               </tr>

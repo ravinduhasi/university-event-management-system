@@ -9,7 +9,7 @@ import {
 } from 'react-icons/bi';
 import LogOut from './LogOut';
 import EventsContent from './EventsContent';
-import UserContent from './UserContent';
+import Parking from './Parking';
 import UProfileContent from './UProfileContent';
 import UHelpContent from './UHelpContent';
 
@@ -19,7 +19,7 @@ const USidebar = ({ setActiveContent }) => {
 
   const menuItems = [
     { label: "Events", icon: <BiTask />, content: <EventsContent /> },
-    { label: "Users", icon: <BiUser />, content: <UserContent /> },
+    { label: "Parking", icon: <BiUser />, content: <Parking /> },
     { label: "Profile", icon: <BiUserCircle />, content: <UProfileContent /> },
     { label: "Help", icon: <BiHelpCircle />, content: <UHelpContent /> },
   ];
