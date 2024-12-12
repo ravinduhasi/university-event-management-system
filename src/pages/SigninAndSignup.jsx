@@ -61,7 +61,7 @@ const AuthPage = () => {
                 } else if (userData.role === "manager") {
                     navigate("/manager"); // Redirect managers to their dashboard
                 } else {
-                    navigate("/skills");
+                    navigate("/user");
                 }
             } else {
                 console.error("No user data found in Firestore!");
