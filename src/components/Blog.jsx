@@ -13,7 +13,7 @@ const Blog = () => {
                     
                     </div>
 
-                    {/* body section */}
+                   
                     <div>
                         <div className='grid grid-cols-1 gap-10 sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-3 place-items-center'>
                         
