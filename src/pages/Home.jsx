@@ -43,7 +43,7 @@ const Home = () => {
         
         <>
         <Navbar />
-            {/* Photo section */}
+            
             <section className="grid grid-cols-1 m-0">
                 <div className="flex justify-center">
                     <img
