@@ -21,11 +21,11 @@ const AuthPage = () => {
             const user = userCredential.user;
 
             // Determine the role
-            let role = "user"; // Default role
+            let role = "user"; 
             if (email === "admin1@gmail.com" || email === "admin2@gmail.com" || email === "admin3@gmail.com") {
                 role = "admin";
             } else if (email.endsWith("@managerdomain.com")) {
-                role = "manager"; // Example manager logic: domain-based
+                role = "manager"; 
             }
 
             // Store user data in Firestore
@@ -59,7 +59,7 @@ const AuthPage = () => {
                 if (userData.role === "admin") {
                     navigate("/admin");
                 } else if (userData.role === "manager") {
-                    navigate("/manager"); // Redirect managers to their dashboard
+                    navigate("/manager");
                 } else {
                     navigate("/user");
                 }
