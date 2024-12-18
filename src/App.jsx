@@ -7,7 +7,8 @@ import AuthPage from "./pages/SigninAndSignup";
 import LayoutWithASidebar from "./pages/AdminDsh/LayoutWithASidebar";
 import LayoutWithMSidebar from "./pages/managerDsh/LayoutWithMSidebar";
 import LayoutWithUSidebar from "./pages/UserDsh/LayoutWithUSidebar";
-import { AddManager } from "./pages/AddManager";
+import UpdateManagerForm from "./pages/AdminDsh/UpdateManagerForm";
+
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<AuthPage />} />
-        <Route path="/AddManager" element={<AddManager />} />
+        <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
 
         {/* Admin Dashboard */}
         <Route path="/admin/*" element={<LayoutWithASidebar />} />
