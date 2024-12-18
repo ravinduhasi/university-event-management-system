@@ -8,7 +8,7 @@ import {
   BiHelpCircle,
   BiUserCircle,
 } from "react-icons/bi";
-import LogOut from "./LogOut";
+import LogOut from "../../components/LogOut";
 import Content from "./Content";
 import ManagerContent from "./ManagerContent";
 import UserContent from "./UserContent";

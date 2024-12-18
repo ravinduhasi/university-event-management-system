@@ -25,6 +25,11 @@ const parkingSlots = [
     name: 'G',
     description: 'Close to the charging station for electric vehicles.',
     image: 'https://via.placeholder.com/300x200'
+  },
+  {
+    name: 'H',
+    description: 'Close to the charging station for electric vehicles.',
+    image: 'https://via.placeholder.com/300x200'
   }
 ];
 
