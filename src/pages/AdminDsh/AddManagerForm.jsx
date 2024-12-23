@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth, db } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const AddManagerForm = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -22,8 +22,24 @@ const AddManagerForm = ({ onClose }) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Add manager data to Firestore under "managers" collection with auto-generated ID
+      // Retrieve the current manager ID from the 'counters' collection
+      const counterRef = doc(db, "counters", "managerID");
+      const counterDoc = await getDoc(counterRef);
+
+      let newManagerId = 1; // Default ID if it doesn't exist
+
+      if (counterDoc.exists()) {
+        newManagerId = counterDoc.data().currentId + 1; // Increment the current manager ID
+      } else {
+        // If no document exists, create it with a starting ID of 1
+        await setDoc(counterRef, {
+          currentId: 1,
+        });
+      }
+
+      // Add manager data to Firestore under "managers" collection with custom ID
       await addDoc(collection(db, "managers"), {
+        managerId: newManagerId, // Assign custom manager ID
         uid: user.uid, // Store the user's UID for future reference
         name,
         department,
@@ -31,6 +47,11 @@ const AddManagerForm = ({ onClose }) => {
         email,
         role: "manager",
         createdAt: new Date().toISOString(), // Add a timestamp
+      });
+
+      // Update the manager ID counter
+      await updateDoc(counterRef, {
+        currentId: newManagerId, // Set the current ID to the newly generated ID
       });
 
       setSuccess("Manager added successfully!");
