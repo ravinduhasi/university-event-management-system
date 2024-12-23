@@ -8,6 +8,7 @@ import LayoutWithASidebar from "./pages/AdminDsh/LayoutWithASidebar";
 import LayoutWithMSidebar from "./pages/managerDsh/LayoutWithMSidebar";
 import LayoutWithUSidebar from "./pages/UserDsh/LayoutWithUSidebar";
 import UpdateManagerForm from "./pages/AdminDsh/UpdateManagerForm";
+import ViewManager from "./pages/AdminDsh/viewmanager";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<AuthPage />} />
         <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
+        <Route path="/view-manager" element={<ViewManager/>} />
 
         {/* Admin Dashboard */}
         <Route path="/admin/*" element={<LayoutWithASidebar />} />
