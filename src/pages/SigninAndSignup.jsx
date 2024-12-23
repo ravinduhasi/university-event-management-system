@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { auth, db } from './Firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import Navbar from '../components/Navbar';
 
 const AuthPage = () => {
@@ -48,29 +48,40 @@ const AuthPage = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
-            // Get user data from Firestore
+    
+            // First, check the "users" collection
             const userDoc = await getDoc(doc(db, "users", user.uid));
-
+    
             if (userDoc.exists()) {
                 const userData = userDoc.data();
-
-                // Redirect based on the user's role
-                if (userData.role === "admin") {
-                    navigate("/admin");
-                } else if (userData.role === "manager") {
-                    navigate("/manager");
-                } else {
-                    navigate("/user");
-                }
+                navigateBasedOnRole(userData.role);
             } else {
-                console.error("No user data found in Firestore!");
+                // If not found in "users," check the "managers" collection
+                const managerDocs = await getDocs(
+                    query(collection(db, "managers"), where("uid", "==", user.uid))
+                );
+                if (!managerDocs.empty) {
+                    const managerData = managerDocs.docs[0].data();
+                    navigateBasedOnRole(managerData.role);
+                } else {
+                    console.error("No user data found in Firestore!");
+                }
             }
         } catch (err) {
             setError(err.message);
         }
     };
-
+    
+    const navigateBasedOnRole = (role) => {
+        if (role === "admin") {
+            navigate("/admin");
+        } else if (role === "manager") {
+            navigate("/manager");
+        } else {
+            navigate("/user");
+        }
+    };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setError("");
