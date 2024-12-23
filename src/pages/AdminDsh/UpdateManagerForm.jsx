@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const UpdateManagerForm = () => {
   const [managers, setManagers] = useState([]);
   const [selectedManager, setSelectedManager] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", managerId: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", managerId: "", department: "", phone: "" });
   const navigate = useNavigate();
 
   // Fetch managers data
@@ -35,9 +35,24 @@ const UpdateManagerForm = () => {
 
     try {
       const managerRef = doc(db, "managers", formData.managerId);
-      await updateDoc(managerRef, { name: formData.name, email: formData.email });
+      await updateDoc(managerRef, {
+        name: formData.name,
+        email: formData.email,
+        department: formData.department,
+        phone: formData.phone
+      });
+
+      // Update manager in the state to reflect the changes instantly
+      setManagers((prevManagers) =>
+        prevManagers.map((manager) =>
+          manager.id === formData.managerId
+            ? { ...manager, name: formData.name, email: formData.email, department: formData.department, phone: formData.phone }
+            : manager
+        )
+      );
+
       alert("Manager updated successfully!");
-      setFormData({ name: "", email: "", managerId: "" });
+      setFormData({ name: "", email: "", department: "", phone: "", managerId: "" });
       setSelectedManager(null);
     } catch (error) {
       console.error("Error updating manager:", error);
@@ -59,7 +74,7 @@ const UpdateManagerForm = () => {
   // Prefill form for updating
   const handleEdit = (manager) => {
     setSelectedManager(manager);
-    setFormData({ name: manager.name, email: manager.email, managerId: manager.id });
+    setFormData({ name: manager.name, email: manager.email, department: manager.department, phone: manager.phone, managerId: manager.id });
   };
 
   return (
@@ -75,30 +90,35 @@ const UpdateManagerForm = () => {
       </div>
 
       {/* Table displaying managers */}
-      <div className="overflow-auto rounded-lg shadow">
-        <table className="min-w-full bg-white">
+      <div className="overflow-auto rounded-lg">
+        <table className="w-[90%] bg-white">
           <thead className="bg-gray-100 border-b">
             <tr>
-              <th className="px-6 py-4 text-left text-gray-600">Name</th>
-              <th className="px-6 py-4 text-left text-gray-600">Email</th>
-              <th className="px-6 py-4 text-left text-gray-600">Actions</th>
+              <th className="px-6 py-4 text-center text-gray-600">Name</th>
+              <th className="px-6 py-4 text-center text-gray-600">Email</th>
+              <th className="px-6 py-4 text-center text-gray-600">Department</th>
+              <th className="px-6 py-4 text-center text-gray-600">Update</th>
+              <th className="px-6 py-4 text-center text-gray-600">Delete</th>
             </tr>
           </thead>
           <tbody>
             {managers.map((manager) => (
               <tr key={manager.id} className="border-b hover:bg-gray-50">
-                <td className="px-6 py-4">{manager.name}</td>
-                <td className="px-6 py-4">{manager.email}</td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-center">{manager.name}</td>
+                <td className="px-6 py-4 text-center">{manager.email}</td>
+                <td className="px-6 py-4 text-center">{manager.department}</td>
+                <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => handleEdit(manager)}
-                    className="px-3 py-1 mr-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700"
+                    className="px-12 py-1 mr-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700"
                   >
                     Update
                   </button>
+                </td>
+                <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => handleDelete(manager.id)}
-                    className="px-3 py-1 text-sm text-white bg-red-600 rounded hover:bg-red-700"
+                    className="px-12 py-1 text-sm text-white bg-red-600 rounded hover:bg-red-700"
                   >
                     Delete
                   </button>
@@ -115,6 +135,7 @@ const UpdateManagerForm = () => {
           <div className="w-1/3 p-6 bg-white rounded-lg shadow-lg">
             <h3 className="mb-4 text-lg font-semibold">Update Manager</h3>
             <form onSubmit={handleUpdate} className="space-y-4">
+              
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Name
@@ -143,12 +164,40 @@ const UpdateManagerForm = () => {
                   required
                 />
               </div>
+              <div>
+                <label htmlFor="department" className="block text-sm font-medium text-gray-700">
+                  Department
+                </label>
+                <input
+                  type="text"
+                  id="department"
+                  name="department"
+                  value={formData.department}
+                  onChange={handleInputChange}
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                  Phone No:
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
               <div className="flex justify-end space-x-2">
                 <button
                   type="button"
                   onClick={() => {
                     setSelectedManager(null);
-                    setFormData({ name: "", email: "", managerId: "" });
+                    setFormData({ name: "", email: "", managerId: "", department: "", phone: "" });
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-md hover:bg-gray-300"
                 >
