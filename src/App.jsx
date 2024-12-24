@@ -11,6 +11,10 @@ import UpdateManagerForm from "./pages/AdminDsh/UpdateManagerForm";
 import ViewManager from "./pages/AdminDsh/viewmanager";
 import UpdateClubForm from "./pages/AdminDsh/update-club";
 import ViewClubs from "./pages/AdminDsh/view-clubs";
+import UpdateEventForm from "./pages/AdminDsh/update-event";
+import ViewEvents from "./pages/AdminDsh/view-event";
+import UpdateUserTable from "./pages/AdminDsh/update-user";
+import ViewUsers from "./pages/AdminDsh/view-user";
 
 
 function App() {
@@ -24,7 +28,10 @@ function App() {
         <Route path="/view-manager" element={<ViewManager/>} />
         <Route path="/update-club" element={<UpdateClubForm/>} />
         <Route path="/view-clubs" element={<ViewClubs/>} />
-
+        <Route path="/update-event" element={<UpdateEventForm/>} />
+        <Route path="/view-event" element={<ViewEvents/>} />
+        <Route path="/update-user" element={<UpdateUserTable/>} />
+        <Route path="/view-user" element={<ViewUsers/>} />
         {/* Admin Dashboard */}
         <Route path="/admin/*" element={<LayoutWithASidebar />} />
 
