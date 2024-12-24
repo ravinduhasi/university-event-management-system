@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, storage } from "../Firebase"; // Make sure you have Firebase Storage setup
+import { db, storage } from "../firebase"; // Make sure you have Firebase Storage setup
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
