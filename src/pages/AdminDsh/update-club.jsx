@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from "../Firebase";
+import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 const UpdateClubForm = () => {
