@@ -9,6 +9,8 @@ import LayoutWithMSidebar from "./pages/managerDsh/LayoutWithMSidebar";
 import LayoutWithUSidebar from "./pages/UserDsh/LayoutWithUSidebar";
 import UpdateManagerForm from "./pages/AdminDsh/UpdateManagerForm";
 import ViewManager from "./pages/AdminDsh/viewmanager";
+import UpdateClubForm from "./pages/AdminDsh/update-club";
+import ViewClubs from "./pages/AdminDsh/view-clubs";
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
         <Route path="/SignUp" element={<AuthPage />} />
         <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
         <Route path="/view-manager" element={<ViewManager/>} />
+        <Route path="/update-club" element={<UpdateClubForm/>} />
+        <Route path="/view-clubs" element={<ViewClubs/>} />
 
         {/* Admin Dashboard */}
         <Route path="/admin/*" element={<LayoutWithASidebar />} />
