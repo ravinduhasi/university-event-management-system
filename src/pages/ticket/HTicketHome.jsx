@@ -4,9 +4,7 @@ import HTicketPricin from './HTicketPricingPlanes';
 
 const Home = () => {
   return (
-    <div>
-      
-      
+    <div>      
       <HTicketPricin />
     </div>
   );
