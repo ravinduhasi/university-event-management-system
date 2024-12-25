@@ -17,6 +17,8 @@ import net from "../assets/net.jpg";
 import Blog from "../components/Blog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import HTicketHome from "./ticket/HTicketHome";
+
 
 const Home = () => {
     
@@ -137,9 +139,10 @@ const Home = () => {
                 whileInView={"show"}
                 viewport={{ once: false, amount: 0.7 }}
                 
-                className="px-5 py-16 font-mono text-4xl font-bold text-center text-black">UPCOMING EVENTS AND BOOKINGS...</motion.h1>
+                className="px-5 py-16 font-mono text-4xl font-bold text-center text-black">Booking Your Ticket Now........ </motion.h1>
 
             </div>
+            <HTicketHome/>
             <Footer/>
         </>
     );
