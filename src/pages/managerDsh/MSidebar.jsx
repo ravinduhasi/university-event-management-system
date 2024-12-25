@@ -5,7 +5,7 @@ import {
   BiUser,
   BiUserCircle,
   BiHelpCircle,
-} from "react-icons/bi"; // Removed duplicate import of BiUser
+} from "react-icons/bi";
 import LogOut from "../../components/LogOut";
 import UserContent from "./UserContent";
 import MProfileContent from "./MProfileContent";
