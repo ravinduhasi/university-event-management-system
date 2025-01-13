@@ -109,7 +109,7 @@ const AddEventForm = ({ onClose }) => {
               onChange={(e) => setDescription(e.target.value)}
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Enter Event Description"
-              rows="4"
+              rows="1"
               required
             ></textarea>
           </div>
