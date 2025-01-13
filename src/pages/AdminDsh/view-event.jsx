@@ -51,8 +51,9 @@ const ViewEvents = () => {
               <tr key={event.id} className="border-b hover:bg-gray-50">
                 <td className="px-6 py-4 text-center">{event.eventName}</td>
                 <td className="px-6 py-4 text-center">
-                  {new Date(event.date).toLocaleString()}
+                  {new Date(`${event.date}T${event.time}`).toLocaleString()}
                 </td>
+
                 <td className="px-6 py-4 text-center">{event.venue}</td>
                 <td className="px-6 py-4 text-center">
                   {event.coordinates ? event.coordinates : "N/A"}
