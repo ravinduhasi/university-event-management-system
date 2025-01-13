@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { db } from "../firebase"; // Adjust the path based on your file structure
+import { db, storage } from "../firebase"; // Adjust the path based on your file structure
 import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddEventForm = ({ onClose }) => {
   const [eventName, setEventName] = useState("");
@@ -8,9 +9,11 @@ const AddEventForm = ({ onClose }) => {
   const [time, setTime] = useState("");
   const [venue, setVenue] = useState("");
   const [coordinates, setCoordinates] = useState("");
-  const [coordinatorName, setCoordinatorName] = useState("");
-  const [coordinatorPhone, setCoordinatorPhone] = useState("");
+  const [ticketPrice1, setTicketPrice1] = useState("");
+  const [ticketPrice2, setTicketPrice2] = useState("");
+  const [ticketPrice3, setTicketPrice3] = useState("");
   const [description, setDescription] = useState("");
+  const [photo, setPhoto] = useState(null); // State for photo file
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -19,21 +22,39 @@ const AddEventForm = ({ onClose }) => {
     setError("");
     setSuccess("");
 
-    if (!eventName || !date || !time || !venue || !coordinates || !coordinatorName || !coordinatorPhone || !description) {
+    if (
+      !eventName ||
+      !date ||
+      !time ||
+      !venue ||
+      !coordinates ||
+      !ticketPrice1 ||
+      !ticketPrice2 ||
+      !ticketPrice3 ||
+      !description ||
+      !photo
+    ) {
       setError("All fields are required.");
       return;
     }
 
     try {
+      // Upload photo to Firebase Storage
+      const storageRef = ref(storage, `event_photos/${photo.name}`);
+      await uploadBytes(storageRef, photo);
+      const photoURL = await getDownloadURL(storageRef);
+
+      // Add event to Firestore
       await addDoc(collection(db, "events"), {
         eventName,
         date,
         time,
         venue,
         coordinates,
-        coordinatorName,
-        coordinatorPhone,
+        ticketPrices: [ticketPrice1, ticketPrice2, ticketPrice3],
         description,
+        photoURL, // Save the uploaded photo URL
+        createdAt: new Date(),
       });
 
       setSuccess("Event added successfully!");
@@ -42,12 +63,21 @@ const AddEventForm = ({ onClose }) => {
       setTime("");
       setVenue("");
       setCoordinates("");
-      setCoordinatorName("");
-      setCoordinatorPhone("");
+      setTicketPrice1("");
+      setTicketPrice2("");
+      setTicketPrice3("");
       setDescription("");
+      setPhoto(null);
     } catch (error) {
       setError("Failed to add event. Please try again.");
       console.error("Error adding document: ", error);
+    }
+  };
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPhoto(file);
     }
   };
 
@@ -81,10 +111,11 @@ const AddEventForm = ({ onClose }) => {
               { id: "eventName", label: "Event Name", value: eventName, type: "text", placeholder: "Enter Event Name", setter: setEventName },
               { id: "date", label: "Date", value: date, type: "date", setter: setDate },
               { id: "time", label: "Time", value: time, type: "time", setter: setTime },
+              { id: "ticketPrice1", label: "Ticket Price 1", value: ticketPrice1, type: "number", placeholder: "Enter Ticket Price 1", setter: setTicketPrice1 },
+              { id: "coordinates", label: "Coordinates", value: coordinates, type: "text", placeholder: "Enter Coordinates", setter: setCoordinates },
+              { id: "ticketPrice2", label: "Ticket Price 2", value: ticketPrice2, type: "number", placeholder: "Enter Ticket Price 2", setter: setTicketPrice2 },
               { id: "venue", label: "Venue", value: venue, type: "text", placeholder: "Enter Venue", setter: setVenue },
-              { id: "coordinates", label: "Coordinates (Latitude, Longitude)", value: coordinates, type: "text", placeholder: "Enter Coordinates", setter: setCoordinates },
-              { id: "coordinatorName", label: "Coordinator Name", value: coordinatorName, type: "text", placeholder: "Enter Coordinator Name", setter: setCoordinatorName },
-              { id: "coordinatorPhone", label: "Coordinator Phone", value: coordinatorPhone, type: "text", placeholder: "Enter Coordinator Phone", setter: setCoordinatorPhone },
+              { id: "ticketPrice3", label: "Ticket Price 3", value: ticketPrice3, type: "number", placeholder: "Enter Ticket Price 3", setter: setTicketPrice3 },
             ].map(({ id, label, value, type, placeholder, setter }) => (
               <div key={id}>
                 <label htmlFor={id} className="block text-sm font-medium text-gray-700">{label}</label>
@@ -99,6 +130,16 @@ const AddEventForm = ({ onClose }) => {
                 />
               </div>
             ))}
+            <div>
+              <label htmlFor="photo" className="block text-sm font-medium text-gray-700">Event Photo</label>
+              <input
+                type="file"
+                id="photo"
+                onChange={handlePhotoChange}
+                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                required
+              />
+            </div>
           </div>
 
           <div>
