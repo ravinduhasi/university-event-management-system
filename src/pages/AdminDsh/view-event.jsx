@@ -37,29 +37,40 @@ const ViewEvents = () => {
         <table className="min-w-full bg-white table-fixed">
           <thead className="bg-gray-100 border-b">
             <tr>
+              <th className="w-1/6 px-6 py-4 text-center text-gray-600">Photo</th>
               <th className="w-1/6 px-6 py-4 text-center text-gray-600">Event Name</th>
               <th className="w-1/6 px-6 py-4 text-center text-gray-600">Date & Time</th>
               <th className="w-1/6 px-6 py-4 text-center text-gray-600">Venue</th>
               <th className="w-1/6 px-6 py-4 text-center text-gray-600">Coordinates</th>
-              <th className="w-1/6 px-6 py-4 text-center text-gray-600">Coordinator Name</th>
-              <th className="w-1/6 px-6 py-4 text-center text-gray-600">Coordinator Phone</th>
+              <th className="w-1/6 px-6 py-4 text-center text-gray-600">Ticket Prices</th>
               <th className="w-1/6 px-6 py-4 text-center text-gray-600">Description</th>
             </tr>
           </thead>
           <tbody>
             {events.map((event) => (
               <tr key={event.id} className="border-b hover:bg-gray-50">
+                <td className="px-6 py-4 text-center">
+                  {event.photoURL ? (
+                    <img
+                      src={event.photoURL}
+                      alt={`${event.eventName} Photo`}
+                      className="object-cover w-24 h-24 rounded-full"
+                    />
+                  ) : (
+                    "No Photo"
+                  )}
+                </td>
                 <td className="px-6 py-4 text-center">{event.eventName}</td>
                 <td className="px-6 py-4 text-center">
                   {new Date(`${event.date}T${event.time}`).toLocaleString()}
                 </td>
-
                 <td className="px-6 py-4 text-center">{event.venue}</td>
                 <td className="px-6 py-4 text-center">
                   {event.coordinates ? event.coordinates : "N/A"}
                 </td>
-                <td className="px-6 py-4 text-center">{event.coordinatorName}</td>
-                <td className="px-6 py-4 text-center">{event.coordinatorPhone}</td>
+                <td className="px-6 py-4 text-center">
+                  {event.ticketPrices ? event.ticketPrices.join(", ") : "N/A"}
+                </td>
                 <td className="px-6 py-4 text-center">{event.description}</td>
               </tr>
             ))}
