@@ -26,6 +26,7 @@ const UserList = () => {
 
   return (
     <div className="p-4">
+      <h2 className="mb-6 text-2xl font-bold">User List</h2>
       <div className="overflow-x-auto overflow-y-scroll max-h-96">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
