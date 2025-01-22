@@ -12,8 +12,7 @@ const UpdateEventForm = () => {
     time: "",
     venue: "",
     coordinates: "",
-    coordinatorName: "",
-    coordinatorPhone: "",
+    ticketPrices: "",
     description: "",
     eventId: "",
   });
@@ -51,15 +50,14 @@ const UpdateEventForm = () => {
         time: formData.time,
         venue: formData.venue,
         coordinates: formData.coordinates,
-        coordinatorName: formData.coordinatorName,
-        coordinatorPhone: formData.coordinatorPhone,
+        ticketPrices: formData.ticketPrices.split(",").map((price) => price.trim()),
         description: formData.description,
       });
 
       setEvents((prevEvents) =>
         prevEvents.map((event) =>
           event.id === formData.eventId
-            ? { ...event, ...formData }
+            ? { ...event, ...formData, ticketPrices: formData.ticketPrices.split(",").map((price) => price.trim()) }
             : event
         )
       );
@@ -71,8 +69,7 @@ const UpdateEventForm = () => {
         time: "",
         venue: "",
         coordinates: "",
-        coordinatorName: "",
-        coordinatorPhone: "",
+        ticketPrices: "",
         description: "",
         eventId: "",
       });
@@ -103,8 +100,7 @@ const UpdateEventForm = () => {
       time: event.time,
       venue: event.venue,
       coordinates: event.coordinates,
-      coordinatorName: event.coordinatorName,
-      coordinatorPhone: event.coordinatorPhone,
+      ticketPrices: event.ticketPrices.join(", "),
       description: event.description,
       eventId: event.id,
     });
@@ -131,6 +127,7 @@ const UpdateEventForm = () => {
               <th className="px-6 py-4 text-center text-gray-600">Date</th>
               <th className="px-6 py-4 text-center text-gray-600">Time</th>
               <th className="px-6 py-4 text-center text-gray-600">Venue</th>
+              <th className="px-6 py-4 text-center text-gray-600">Ticket Prices</th>
               <th className="px-6 py-4 text-center text-gray-600">Update</th>
               <th className="px-6 py-4 text-center text-gray-600">Delete</th>
             </tr>
@@ -142,6 +139,9 @@ const UpdateEventForm = () => {
                 <td className="px-6 py-4 text-center">{event.date}</td>
                 <td className="px-6 py-4 text-center">{event.time}</td>
                 <td className="px-6 py-4 text-center">{event.venue}</td>
+                <td className="px-6 py-4 text-center">
+                  {event.ticketPrices ? event.ticketPrices.join(", ") : "N/A"}
+                </td>
                 <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => handleEdit(event)}
@@ -170,15 +170,12 @@ const UpdateEventForm = () => {
           <div className="w-1/3 p-6 bg-white rounded-lg shadow-lg">
             <h3 className="mb-4 text-lg font-semibold">Update Event</h3>
             <form onSubmit={handleUpdate} className="space-y-4">
-              {[
-                { id: "eventName", label: "Event Name", type: "text", value: formData.eventName },
+              {[{ id: "eventName", label: "Event Name", type: "text", value: formData.eventName },
                 { id: "date", label: "Date", type: "date", value: formData.date },
                 { id: "time", label: "Time", type: "time", value: formData.time },
                 { id: "venue", label: "Venue", type: "text", value: formData.venue },
                 { id: "coordinates", label: "Coordinates", type: "text", value: formData.coordinates },
-                { id: "coordinatorName", label: "Coordinator Name", type: "text", value: formData.coordinatorName },
-                { id: "coordinatorPhone", label: "Coordinator Phone", type: "text", value: formData.coordinatorPhone },
-              ].map(({ id, label, type, value }) => (
+                { id: "ticketPrices", label: "Ticket Prices", type: "text", value: formData.ticketPrices }].map(({ id, label, type, value }) => (
                 <div key={id}>
                   <label htmlFor={id} className="block text-sm font-medium text-gray-700">
                     {label}
@@ -218,8 +215,7 @@ const UpdateEventForm = () => {
                       time: "",
                       venue: "",
                       coordinates: "",
-                      coordinatorName: "",
-                      coordinatorPhone: "",
+                      ticketPrices: "",
                       description: "",
                       eventId: "",
                     });
