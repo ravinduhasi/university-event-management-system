@@ -1,103 +1,99 @@
-import React from 'react';
-
-const events = [
-  {
-    name: 'John',
-    date: '2001/09/11',
-    place: 'New York',
-    club:'art',
-    cost: '200',
-  },
-  {
-    name: 'Doe',
-    date: '2000/08/19',
-    place: 'New York',
-    club:'art',
-    cost: '150',
-  },
-  {
-    name: 'Smith',
-    date: '1999/11/05',
-    place: 'New York',
-    club:'art',
-    cost: '175',
-  },
-  {
-    name: 'John',
-    date: '2001/09/11',
-    place: 'New York',
-    club:'art',
-    cost: '200',
-  },
-  {
-    name: 'Doe',
-    date: '2000/08/19',
-    place: 'New York',
-    club:'art',
-    cost: '150',
-  },
-  {
-    name: 'Smith',
-    date: '1999/11/05',
-    place: 'New York',
-    club:'art',
-    cost: '175',
-  },
-  {
-    name: 'John',
-    date: '2001/09/11',
-    place: 'New York',
-    club:'art',
-    cost: '200',
-  },
-  {
-    name: 'Doe',
-    date: '2000/08/19',
-    place: 'New York',
-    club:'art',
-    cost: '150',
-  },
-  {
-    name: 'Smith',
-    date: '1999/11/05',
-    place: 'New York',
-    club:'art',
-    cost: '175',
-  },
-];
-
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase"; // Adjust the path based on your Firebase setup
 
 const EventList = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch events data from Firestore
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "events"));
+        const eventData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching events: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
-    <div className="p-4">     
-      <div className="overflow-x-auto overflow-y-scroll max-h-96">
-        <table className="w-full min-w-[640px] table-auto border-collapse">
-          <thead className='bg-gray-50'>
-            <tr>
-              <th  className="px-6 py-3 text-xs font-light tracking-wider text-left text-gray-500 uppercase">Name</th>
-              <th  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Date</th>
-              <th  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Place</th>
-              <th  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Cost</th>
-              <th  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Club Name</th>
-              <th  className="px-20 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((event, index) => (
-              <tr key={index} className="bg-white border-b">
-                <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{event.name}</td>
-                <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{event.date}</td>
-                <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{event.place}</td>
-                <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{event.cost}</td>
-                <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{event.club}</td>
-                <td className="px-20 py-4 text-sm font-medium text-left whitespace-nowrap">
-                  <a href="#" className="text-[#000000] hover:text-[#526d82]">View</a>
-                </td>
+    <div className="p-4">
+      <h1 className="mb-6 text-2xl font-bold">Event List</h1>
+      {loading ? (
+        <p>Loading events...</p>
+      ) : (
+        <div className="overflow-x-auto overflow-y-scroll max-h-96">
+          <table className="w-full min-w-[640px] table-auto border-collapse">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Photo
+                </th>
+                <th className="px-6 py-3 text-xs font-light tracking-wider text-left text-gray-500 uppercase">
+                  Name
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Date & Time
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Place
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Ticket Prices
+                </th>
+                <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Club Name
+                </th>
+
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {events.map((event) => (
+                <tr key={event.id} className="bg-white border-b">
+
+                  <td className="px-6 py-4 text-center">
+                    {event.photoURL ? (
+                      <img
+                        src={event.photoURL}
+                        alt={`${event.eventName} Photo`}
+                        className="w-12 h-12 bg-gray-100 rounded-full"
+                      />
+                    ) : (
+                      "No Photo"
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                    {event.eventName || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {new Date(`${event.date}T${event.time}`).toLocaleString()}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {event.venue || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {event.ticketPrices ? event.ticketPrices.join(", ") : "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    {event.coordinates || "N/A"}
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
