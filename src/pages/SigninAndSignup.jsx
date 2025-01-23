@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, db } from './Firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import Navbar from '../components/Navbar';
 
 const AuthPage = () => {
@@ -15,17 +15,18 @@ const AuthPage = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    // Handle Sign-Up
     const handleSignUp = async () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Determine the role
-            let role = "user"; 
+            // Assign role based on email
+            let role = "user";
             if (email === "admin1@gmail.com" || email === "admin2@gmail.com" || email === "admin3@gmail.com") {
                 role = "admin";
             } else if (email.endsWith("@managerdomain.com")) {
-                role = "manager"; 
+                role = "manager";
             }
 
             // Store user data in Firestore
@@ -38,40 +39,44 @@ const AuthPage = () => {
             });
 
             console.log("User signed up and data stored in Firestore:", user);
-            setIsSignUp(false); // Switch to the sign-in form
+            setIsSignUp(false); // Switch to sign-in form after registration
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Handle Sign-In
     const handleSignIn = async () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-    
-            // First, check the "users" collection
+
+            // Fetch user details from Firestore
             const userDoc = await getDoc(doc(db, "users", user.uid));
-    
+
             if (userDoc.exists()) {
                 const userData = userDoc.data();
+
+                // Store session data in localStorage
+                const sessionData = {
+                    uid: user.uid,
+                    name: userData.name,
+                    email: userData.email,
+                    role: userData.role,
+                };
+                localStorage.setItem("userSession", JSON.stringify(sessionData));
+
+                // Navigate based on role
                 navigateBasedOnRole(userData.role);
             } else {
-                // If not found in "users," check the "managers" collection
-                const managerDocs = await getDocs(
-                    query(collection(db, "managers"), where("uid", "==", user.uid))
-                );
-                if (!managerDocs.empty) {
-                    const managerData = managerDocs.docs[0].data();
-                    navigateBasedOnRole(managerData.role);
-                } else {
-                    console.error("No user data found in Firestore!");
-                }
+                setError("No user data found in Firestore.");
             }
         } catch (err) {
             setError(err.message);
         }
     };
-    
+
+    // Navigate based on user role
     const navigateBasedOnRole = (role) => {
         if (role === "admin") {
             navigate("/admin");
@@ -81,7 +86,17 @@ const AuthPage = () => {
             navigate("/user");
         }
     };
-    
+
+    // Check session on page load
+    useEffect(() => {
+        const session = localStorage.getItem("userSession");
+        if (session) {
+            const { role } = JSON.parse(session);
+            navigateBasedOnRole(role);
+        }
+    }, []);
+
+    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         setError("");
@@ -128,23 +143,22 @@ const AuthPage = () => {
                             />
 
                             {isSignUp && (
-                                <input
-                                    type="text"
-                                    placeholder="Enter Your Department"
-                                    value={department}
-                                    onChange={(e) => setDepartment(e.target.value)}
-                                    className="w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]"
-                                />
-                            )}
-
-                            {isSignUp && (
-                                <input
-                                    type="text"
-                                    placeholder="Enter Your Number"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]"
-                                />
+                                <>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Your Department"
+                                        value={department}
+                                        onChange={(e) => setDepartment(e.target.value)}
+                                        className="w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Your Number"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        className="w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]"
+                                    />
+                                </>
                             )}
 
                             <input
@@ -154,18 +168,6 @@ const AuthPage = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full text-[#ffffff] py-2 mb-4 bg-transparent border-b border-[#7b6767] outline-none placeholder-[#ffffff36]"
                             />
-
-                            <div className="flex items-center justify-between w-full mb-4">
-                                <div className="flex items-center">
-                                    <input type="checkbox" className="w-4 h-4 mr-2" />
-                                    <p className="text-sm text-[#7a68689e]">Remember me</p>
-                                </div>
-                                {!isSignUp && (
-                                    <p className="text-sm font-medium underline cursor-pointer whitespace-nowrap underline-offset-2 text-[#7a68689e]">
-                                        Forget password
-                                    </p>
-                                )}
-                            </div>
 
                             <button
                                 type="submit"
