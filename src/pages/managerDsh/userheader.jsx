@@ -4,8 +4,8 @@ const UserHeader = () => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h1 className="text-[#526d82] font-semibold text-xl">User Managers</h1>
+      <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <h1 className="text-[#526d82] font-semibold text-xl">Users</h1>
         <div className="flex items-center gap-5">
           <div className="p-2">
             <div className="relative h-10 w-full min-w-[200px]">
