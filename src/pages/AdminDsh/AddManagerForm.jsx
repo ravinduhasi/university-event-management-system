@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth, db } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const AddManagerForm = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -37,8 +37,8 @@ const AddManagerForm = ({ onClose }) => {
         });
       }
 
-      // Add manager data to Firestore under "managers" collection with custom ID
-      await addDoc(collection(db, "managers"), {
+      // Add manager data to Firestore under "users" collection with UID as the document ID
+      await setDoc(doc(db, "users", user.uid), {
         managerId: newManagerId, // Assign custom manager ID
         uid: user.uid, // Store the user's UID for future reference
         name,
@@ -97,10 +97,7 @@ const AddManagerForm = ({ onClose }) => {
 
         <form onSubmit={handleAddManager} className="space-y-4">
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Name
             </label>
             <input
@@ -115,10 +112,7 @@ const AddManagerForm = ({ onClose }) => {
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
@@ -133,10 +127,7 @@ const AddManagerForm = ({ onClose }) => {
           </div>
 
           <div>
-            <label
-              htmlFor="department"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="department" className="block text-sm font-medium text-gray-700">
               Department
             </label>
             <input
@@ -151,10 +142,7 @@ const AddManagerForm = ({ onClose }) => {
           </div>
 
           <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
               Phone
             </label>
             <input
@@ -169,10 +157,7 @@ const AddManagerForm = ({ onClose }) => {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Temporary Password
             </label>
             <input
