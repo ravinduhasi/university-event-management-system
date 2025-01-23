@@ -23,7 +23,7 @@ const UpdateUserTable = () => {
                 const usersSnapshot = await getDocs(collection(db, "users"));
                 const usersData = usersSnapshot.docs
                     .map((doc) => ({ id: doc.id, ...doc.data() }))
-                    .filter((user) => user.role === "user" || user.role === "manager");
+                    .filter((user) => user.role === "user" );
 
                 const managersSnapshot = await getDocs(collection(db, "managers"));
                 const managersData = managersSnapshot.docs
