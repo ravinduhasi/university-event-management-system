@@ -6,9 +6,11 @@ const LogOut = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Add your logout logic here (e.g., clearing tokens, user data, etc.)
-    console.log('User logged out');
-    // Redirect to the home page after logout
+    // Clear session data from localStorage
+    localStorage.removeItem('userSession');
+    console.log('User session cleared and logged out');
+
+    // Redirect to the home page or login page
     navigate('/');
   };
 
