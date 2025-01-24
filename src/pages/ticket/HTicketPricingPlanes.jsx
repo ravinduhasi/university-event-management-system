@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase"; // Adjust the path based on your file structure
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export default function Pricing() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -32,17 +34,20 @@ export default function Pricing() {
   if (loading) return <p>Loading events...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
+  const handleNavigate = (eventId) => {
+    console.log("Navigating to ticket page with event ID:", eventId);
+    sessionStorage.setItem("eventId", eventId); // Save eventId to sessionStorage
+    navigate('/ticket'); // Navigate to the ticket page
+  };
+
   return (
     <div className="relative">
       <div className="absolute inset-0 flex flex-col"></div>
 
       <div className="grid gap-12 px-4 py-24 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {events.map((event, index) => {
-          // Define background colors for each card
           const bgColor =
             index === 0 ? "bg-green-100" : index === 1 ? "bg-blue-100" : "bg-red-100";
-
-          // Define width and height for each card using inline styles
           const dimensions = { width: "auto", height: "195px" };
 
           return (
@@ -50,23 +55,18 @@ export default function Pricing() {
               key={event.id}
               className={`relative flex flex-col p-8 transition duration-700 ease-in-out border rounded-md shadow-2xl border-slate-200 hover:scale-105 ${bgColor}`}
               style={dimensions}
+              onClick={() => handleNavigate(event.id)} // Pass event ID on click
             >
               <div className="flex">
-                {/* Render Image */}
                 <img
-                  src={event.photoURL ? event.photoURL : "https://via.placeholder.com/150"} // Use a placeholder if no image is provided
+                  src={event.photoURL ? event.photoURL : "https://via.placeholder.com/150"}
                   alt={event.eventName}
                   className="object-cover w-32 h-32 mr-4 rounded-md"
                 />
-
                 <div className="flex-1">
-                  {/* Title */}
                   <h3 className="text-lg font-semibold leading-5">{event.eventName}</h3>
-
                   <p className="mt-4 text-sm leading-6 text-slate-700">{event.description}</p>
-
                   <div className="flex items-start justify-start mt-4">
-                    {/* Ticket Prices */}
                     <div className="p-3 rounded-md bg-slate-50 w-[220px] h-[80px] flex items-center justify-center translate-x-180 -translate-y-13">
                       <p className="flex items-center text-sm font-semibold text-slate-500">
                         <span className="ml-2 text-4xl text-slate-900">
@@ -76,8 +76,6 @@ export default function Pricing() {
                       </p>
                     </div>
                   </div>
-
-                  {/* Features */}
                   <ul className="flex-1 mt-2 space-y-2">
                     {event.features?.map((feature) => (
                       <li key={feature} className="flex items-center text-sm leading-6 text-slate-700">
