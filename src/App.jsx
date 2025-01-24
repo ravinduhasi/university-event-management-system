@@ -15,6 +15,8 @@ import UpdateEventForm from "./pages/AdminDsh/update-event";
 import ViewEvents from "./pages/AdminDsh/view-event";
 import UpdateUserTable from "./pages/AdminDsh/update-user";
 import ViewUsers from "./pages/AdminDsh/view-user";
+import HomeTicket from "./pages/price-section/TicketHome";
+
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
         <Route path="/view-event" element={<ViewEvents/>} />
         <Route path="/update-user" element={<UpdateUserTable/>} />
         <Route path="/view-user" element={<ViewUsers/>} />
+        <Route path="/ticket" element={<HomeTicket/>} />
         {/* Admin Dashboard */}
         <Route path="/admin/*" element={<LayoutWithASidebar />} />
 
