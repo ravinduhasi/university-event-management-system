@@ -1,7 +1,7 @@
 import React from 'react';
 import Pricing from './TicketPricingPlanes';
 
-const Home = () => {
+const HomeTicket = () => {
   return (
     <div>
       
@@ -19,4 +19,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default HomeTicket;
