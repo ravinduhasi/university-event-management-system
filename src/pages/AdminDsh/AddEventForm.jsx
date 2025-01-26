@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { db, storage } from "../firebase"; // Adjust the path based on your file structure
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -14,13 +16,9 @@ const AddEventForm = ({ onClose }) => {
   const [ticketPrice3, setTicketPrice3] = useState("");
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null); // State for photo file
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (
       !eventName ||
@@ -34,7 +32,7 @@ const AddEventForm = ({ onClose }) => {
       !description ||
       !photo
     ) {
-      setError("All fields are required.");
+      toast.error("All fields are required.");
       return;
     }
 
@@ -57,7 +55,7 @@ const AddEventForm = ({ onClose }) => {
         createdAt: new Date(),
       });
 
-      setSuccess("Event added successfully!");
+      toast.success("Event added successfully!");
       setEventName("");
       setDate("");
       setTime("");
@@ -69,7 +67,7 @@ const AddEventForm = ({ onClose }) => {
       setDescription("");
       setPhoto(null);
     } catch (error) {
-      setError("Failed to add event. Please try again.");
+      toast.error("Failed to add event. Please try again.");
       console.error("Error adding document: ", error);
     }
   };
@@ -83,6 +81,7 @@ const AddEventForm = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+      <ToastContainer />
       <div className="relative w-full max-w-4xl p-6 bg-white rounded-lg shadow-xl">
         <button
           onClick={onClose}
@@ -101,9 +100,6 @@ const AddEventForm = ({ onClose }) => {
         </button>
 
         <h2 className="mb-6 text-xl font-semibold text-center text-blue-600">Add New Event</h2>
-
-        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
-        {success && <p className="mb-4 text-sm text-green-500">{success}</p>}
 
         <form onSubmit={handleAddEvent} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -150,7 +146,7 @@ const AddEventForm = ({ onClose }) => {
               onChange={(e) => setDescription(e.target.value)}
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Enter Event Description"
-              rows="1"
+              rows="3"
               required
             ></textarea>
           </div>
