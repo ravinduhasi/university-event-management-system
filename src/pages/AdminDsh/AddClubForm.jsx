@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { db, storage } from "../firebase"; // Make sure you have Firebase Storage setup
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddClubForm = ({ onClose }) => {
   const [clubName, setClubName] = useState("");
@@ -10,8 +12,6 @@ const AddClubForm = ({ onClose }) => {
   const [phone, setPhone] = useState("");
   const [presidentName, setPresidentName] = useState("");
   const [logo, setLogo] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const handleFileChange = (e) => {
@@ -20,8 +20,6 @@ const AddClubForm = ({ onClose }) => {
 
   const handleAddClub = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
     setUploading(true);
 
     try {
@@ -47,7 +45,10 @@ const AddClubForm = ({ onClose }) => {
         createdAt: new Date().toISOString(), // Add a timestamp
       });
 
-      setSuccess("Club added successfully!");
+      // Show success toast
+      toast.success("Club added successfully!");
+
+      // Reset form fields
       setClubName("");
       setDescription("");
       setEmail("");
@@ -55,7 +56,7 @@ const AddClubForm = ({ onClose }) => {
       setPresidentName("");
       setLogo(null);
     } catch (err) {
-      setError(err.message);
+      toast.error(`Error: ${err.message}`);
     } finally {
       setUploading(false);
     }
@@ -87,9 +88,6 @@ const AddClubForm = ({ onClose }) => {
         <h2 className="mb-6 text-2xl font-bold text-center text-blue-600">
           Add New Club
         </h2>
-
-        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
-        {success && <p className="mb-4 text-sm text-green-500">{success}</p>}
 
         <form onSubmit={handleAddClub} className="space-y-4">
           <div>
@@ -216,6 +214,7 @@ const AddClubForm = ({ onClose }) => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
