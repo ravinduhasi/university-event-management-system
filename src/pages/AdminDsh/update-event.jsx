@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateEventForm = () => {
   const [events, setEvents] = useState([]);
@@ -21,12 +23,16 @@ const UpdateEventForm = () => {
   // Fetch events data
   useEffect(() => {
     const fetchEvents = async () => {
-      const querySnapshot = await getDocs(collection(db, "events"));
-      const eventData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setEvents(eventData);
+      try {
+        const querySnapshot = await getDocs(collection(db, "events"));
+        const eventData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setEvents(eventData);
+      } catch (error) {
+        toast.error("Error fetching events.");
+      }
     };
     fetchEvents();
   }, []);
@@ -62,7 +68,7 @@ const UpdateEventForm = () => {
         )
       );
 
-      alert("Event updated successfully!");
+      toast.success("Event updated successfully!");
       setFormData({
         eventName: "",
         date: "",
@@ -75,6 +81,7 @@ const UpdateEventForm = () => {
       });
       setSelectedEvent(null);
     } catch (error) {
+      toast.error("Error updating event.");
       console.error("Error updating event:", error);
     }
   };
@@ -84,9 +91,10 @@ const UpdateEventForm = () => {
     try {
       const eventRef = doc(db, "events", id);
       await deleteDoc(eventRef);
-      alert("Event deleted successfully!");
+      toast.success("Event deleted successfully!");
       setEvents(events.filter((event) => event.id !== id));
     } catch (error) {
+      toast.error("Error deleting event.");
       console.error("Error deleting event:", error);
     }
   };
@@ -108,6 +116,7 @@ const UpdateEventForm = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg">
+      <ToastContainer />
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold">Manage Events</h2>
         <button
@@ -170,12 +179,14 @@ const UpdateEventForm = () => {
           <div className="w-1/3 p-6 bg-white rounded-lg shadow-lg">
             <h3 className="mb-4 text-lg font-semibold">Update Event</h3>
             <form onSubmit={handleUpdate} className="space-y-4">
-              {[{ id: "eventName", label: "Event Name", type: "text", value: formData.eventName },
+              {[
+                { id: "eventName", label: "Event Name", type: "text", value: formData.eventName },
                 { id: "date", label: "Date", type: "date", value: formData.date },
                 { id: "time", label: "Time", type: "time", value: formData.time },
                 { id: "venue", label: "Venue", type: "text", value: formData.venue },
                 { id: "coordinates", label: "Coordinates", type: "text", value: formData.coordinates },
-                { id: "ticketPrices", label: "Ticket Prices", type: "text", value: formData.ticketPrices }].map(({ id, label, type, value }) => (
+                { id: "ticketPrices", label: "Ticket Prices", type: "text", value: formData.ticketPrices },
+              ].map(({ id, label, type, value }) => (
                 <div key={id}>
                   <label htmlFor={id} className="block text-sm font-medium text-gray-700">
                     {label}
