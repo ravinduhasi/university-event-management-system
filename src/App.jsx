@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+
 // Page Components
 import Home from "./pages/Home";
 import AuthPage from "./pages/SigninAndSignup";
@@ -22,8 +23,10 @@ import HomeTicket from "./pages/price-section/TicketHome";
 function App() {
   return (
     <Router>
+      
       <Routes>
         {/* Public Routes */}
+        
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<AuthPage />} />
         <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
