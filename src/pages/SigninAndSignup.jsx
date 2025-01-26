@@ -72,7 +72,7 @@ const AuthPage = () => {
         // Add delay before navigation
         setTimeout(() => {
           navigateBasedOnRole(userData.role);
-        }, 4000); // 2-second delay
+        }, 4000); 
       } else {
         toast.error("Sign-in failed: No user data found.");
       }
