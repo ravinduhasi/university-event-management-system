@@ -65,7 +65,7 @@ export default function Pricing() {
                 />
                 <div className="flex-1">
                   <h3 className="text-4xl font-semibold leading-5 text-blue-600/100 dark:text-sky-400/100">{event.eventName}</h3>
-                  <p className="mt-4 text-sm leading-6 text-slate-700">{event.description}</p>
+                  <p className="mt-4 text-xl leading-6 text-slate-700">{event.description}</p>
                   <div className="absolute right-10 bottom-15 ">
                     <div className="p-3 rounded-md bg-slate-50 w-[220px] h-[80px] flex items-center justify-center translate-x-180 -translate-y-13">
                       <p className="flex items-center text-sm font-semibold text-slate-500">
