@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateUserTable = () => {
     const [users, setUsers] = useState([]);
@@ -23,7 +25,7 @@ const UpdateUserTable = () => {
                 const usersSnapshot = await getDocs(collection(db, "users"));
                 const usersData = usersSnapshot.docs
                     .map((doc) => ({ id: doc.id, ...doc.data() }))
-                    .filter((user) => user.role === "user" );
+                    .filter((user) => user.role === "user");
 
                 const managersSnapshot = await getDocs(collection(db, "managers"));
                 const managersData = managersSnapshot.docs
@@ -35,6 +37,7 @@ const UpdateUserTable = () => {
                 setUsers(combinedData);
             } catch (error) {
                 console.error("Error fetching users:", error);
+                toast.error("Error fetching users.");
             }
         };
 
@@ -67,7 +70,7 @@ const UpdateUserTable = () => {
                 )
             );
 
-            alert("User updated successfully!");
+            toast.success("User updated successfully!");
             setFormData({
                 name: "",
                 email: "",
@@ -78,6 +81,7 @@ const UpdateUserTable = () => {
             setSelectedUser(null);
         } catch (error) {
             console.error("Error updating user:", error);
+            toast.error("Error updating user.");
         }
     };
 
@@ -85,10 +89,11 @@ const UpdateUserTable = () => {
         try {
             const userRef = doc(db, "users", id);
             await deleteDoc(userRef);
-            alert("User deleted successfully!");
+            toast.success("User deleted successfully!");
             setUsers(users.filter((user) => user.id !== id));
         } catch (error) {
             console.error("Error deleting user:", error);
+            toast.error("Error deleting user.");
         }
     };
 
@@ -105,6 +110,7 @@ const UpdateUserTable = () => {
 
     return (
         <div className="p-6 bg-white rounded-lg shadow-lg">
+            <ToastContainer />
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold">Manage Users</h2>
                 <button
