@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateManagerForm = () => {
   const [managers, setManagers] = useState([]);
@@ -51,11 +53,12 @@ const UpdateManagerForm = () => {
         )
       );
 
-      alert("Manager updated successfully!");
+      toast.success("Manager updated successfully!");
       setFormData({ name: "", email: "", department: "", phone: "", managerId: "" });
       setSelectedManager(null);
     } catch (error) {
       console.error("Error updating manager:", error);
+      toast.error("Error updating manager!");
     }
   };
 
@@ -64,10 +67,11 @@ const UpdateManagerForm = () => {
     try {
       const managerRef = doc(db, "managers", id);
       await deleteDoc(managerRef);
-      alert("Manager deleted successfully!");
+      toast.success("Manager deleted successfully!");
       setManagers(managers.filter((manager) => manager.id !== id));
     } catch (error) {
       console.error("Error deleting manager:", error);
+      toast.error("Error deleting manager!");
     }
   };
 
@@ -214,6 +218,8 @@ const UpdateManagerForm = () => {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </div>
   );
 };
