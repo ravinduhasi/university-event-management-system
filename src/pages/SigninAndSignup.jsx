@@ -63,6 +63,7 @@ const AuthPage = () => {
           uid: user.uid,
           name: userData.name,
           email: userData.email,
+          phone: userData.phone,
           role: userData.role,
         };
         localStorage.setItem("userSession", JSON.stringify(sessionData));
