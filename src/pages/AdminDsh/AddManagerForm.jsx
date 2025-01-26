@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { auth, db } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddManagerForm = ({ onClose }) => {
   const [email, setEmail] = useState("");
@@ -9,13 +11,9 @@ const AddManagerForm = ({ onClose }) => {
   const [name, setName] = useState("");
   const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleAddManager = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     try {
       // Create a new user with email and password
@@ -54,14 +52,14 @@ const AddManagerForm = ({ onClose }) => {
         currentId: newManagerId, // Set the current ID to the newly generated ID
       });
 
-      setSuccess("Manager added successfully!");
+      toast.success("Manager added successfully!");
       setEmail("");
       setPassword("");
       setName("");
       setDepartment("");
       setPhone("");
     } catch (err) {
-      setError(err.message);
+      toast.error(`Error: ${err.message}`);
     }
   };
 
@@ -91,9 +89,6 @@ const AddManagerForm = ({ onClose }) => {
         <h2 className="mb-6 text-2xl font-bold text-center text-blue-600">
           Add New Manager
         </h2>
-
-        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
-        {success && <p className="mb-4 text-sm text-green-500">{success}</p>}
 
         <form onSubmit={handleAddManager} className="space-y-4">
           <div>
@@ -188,6 +183,8 @@ const AddManagerForm = ({ onClose }) => {
           </div>
         </form>
       </div>
+      {/* Toast container */}
+      <ToastContainer />
     </div>
   );
 };
