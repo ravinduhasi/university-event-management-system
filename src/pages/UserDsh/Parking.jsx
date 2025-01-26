@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, query, where, addDoc, getDocs } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import parking1 from '../../assets/parking1.jpg';
 import parking2 from '../../assets/parking2.jpg';
 import parking3 from '../../assets/parking3.jpg';
 import parking4 from '../../assets/parking4.jpg';
 import parking5 from '../../assets/parking6.jpg';
 
-
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyBubWYb40n-2cIv1TPNPLjSW1mRmfFo4uM",
   authDomain: "taskform-8c494.firebaseapp.com",
@@ -23,31 +25,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const parkingSlots = [
-  {
-    name: 'A',
-    description: 'Convenient spot near the main entrance.',
-    image: parking1,
-  },
-  {
-    name: 'S',
-    description: 'Shaded area with easy access to elevators.',
-    image: parking2,
-  },
-  {
-    name: 'D',
-    description: 'Spacious spot near the bike parking zone.',
-    image: parking3,
-  },
-  {
-    name: 'F',
-    description: 'Prime location near the exit gate.',
-    image: parking4,
-  },
-  {
-    name: 'G',
-    description: 'Close to the charging station for electric vehicles.',
-    image: parking5,
-  },
+  { name: 'A', description: 'Convenient spot near the main entrance.', image: parking1 },
+  { name: 'S', description: 'Shaded area with easy access to elevators.', image: parking2 },
+  { name: 'D', description: 'Spacious spot near the bike parking zone.', image: parking3 },
+  { name: 'F', description: 'Prime location near the exit gate.', image: parking4 },
+  { name: 'G', description: 'Close to the charging station for electric vehicles.', image: parking5 },
 ];
 
 const ParkingManagementSystem = () => {
@@ -63,13 +45,12 @@ const ParkingManagementSystem = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  // Retrieve user session from localStorage on initial load
   useEffect(() => {
     const sessionData = JSON.parse(localStorage.getItem("userSession"));
     if (sessionData && sessionData.uid) {
       setFormData((prevData) => ({
         ...prevData,
-        uid: sessionData.uid, // Ensure uid is set correctly from session
+        uid: sessionData.uid,
       }));
     }
   }, []);
@@ -82,7 +63,7 @@ const ParkingManagementSystem = () => {
   const closeBookingForm = () => {
     setIsBookingFormOpen(false);
     setFormData({
-      uid: '', // Reset the user ID
+      uid: '',
       username: '',
       vehicleName: '',
       phoneNumber: '',
@@ -105,51 +86,33 @@ const ParkingManagementSystem = () => {
     const { uid, date, slotNumber } = formData;
 
     try {
-      // Log uid to ensure it is being passed correctly
-      console.log("User ID:", uid);
-
-      // Query Firestore to check if the slot or user has already booked for the day
       const bookingsRef = collection(db, 'bookedSlots');
-      const q = query(
-        bookingsRef,
-        where('date', '==', date),
-        where('slotNumber', '==', slotNumber)
-      );
-      const userQuery = query(
-        bookingsRef,
-        where('date', '==', date),
-        where('uid', '==', uid)  // Ensure we're checking the correct uid
-      );
+      const q = query(bookingsRef, where('date', '==', date), where('slotNumber', '==', slotNumber));
+      const userQuery = query(bookingsRef, where('date', '==', date), where('uid', '==', uid));
 
       const existingSlot = await getDocs(q);
       const existingUser = await getDocs(userQuery);
 
       if (!existingSlot.empty) {
-        alert('This slot is already booked for the selected date.');
+        toast.error('This slot is already booked for the selected date.');
         setLoading(false);
         return;
       }
 
       if (!existingUser.empty) {
-        alert('You have already booked a slot for this day.');
+        toast.error('You have already booked a slot for this day.');
         setLoading(false);
         return;
       }
 
-      // Add booking to Firestore
-      await addDoc(bookingsRef, {
-        ...formData,
-        slot: selectedSlot,
-      });
-
-      // Save user session to localStorage for future access
+      await addDoc(bookingsRef, { ...formData, slot: selectedSlot });
       localStorage.setItem("userSession", JSON.stringify({ uid }));
 
-      alert('Slot booked successfully!');
+      toast.success('Slot booked successfully!');
       closeBookingForm();
     } catch (error) {
       console.error('Error booking slot:', error);
-      alert('Failed to book the slot. Please try again.');
+      toast.error('Failed to book the slot. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -166,11 +129,7 @@ const ParkingManagementSystem = () => {
             className="relative flex flex-col overflow-hidden transition-transform duration-300 bg-white border border-gray-200 shadow-md cursor-pointer rounded-xl hover:scale-105"
             onClick={() => openBookingForm(slot.name)}
           >
-            <img
-              src={slot.image}
-              alt={`Parking Slot ${slot.name}`}
-              className="object-cover w-full h-40"
-            />
+            <img src={slot.image} alt={`Parking Slot ${slot.name}`} className="object-cover w-full h-40" />
             <div className="p-4 text-center">
               <h2 className="text-xl font-semibold text-gray-800">Parking Slot {slot.name}</h2>
               <p className="mt-2 text-sm text-gray-600">{slot.description}</p>
@@ -185,9 +144,7 @@ const ParkingManagementSystem = () => {
             <h2 className="mb-4 text-2xl font-bold text-gray-800">Book Parking Slot</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                  Username
-                </label>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                 <input
                   type="text"
                   id="username"
@@ -199,9 +156,7 @@ const ParkingManagementSystem = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="vehicleName" className="block text-sm font-medium text-gray-700">
-                  Vehicle Name
-                </label>
+                <label htmlFor="vehicleName" className="block text-sm font-medium text-gray-700">Vehicle Name</label>
                 <input
                   type="text"
                   id="vehicleName"
@@ -213,9 +168,7 @@ const ParkingManagementSystem = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                  Phone Number
-                </label>
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
                 <input
                   type="text"
                   id="phoneNumber"
@@ -227,9 +180,7 @@ const ParkingManagementSystem = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="date" className="block text-sm font-medium text-gray-700">
-                  Date
-                </label>
+                <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
                 <input
                   type="date"
                   id="date"
@@ -241,9 +192,7 @@ const ParkingManagementSystem = () => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="slotNumber" className="block text-sm font-medium text-gray-700">
-                  Slot Number
-                </label>
+                <label htmlFor="slotNumber" className="block text-sm font-medium text-gray-700">Slot Number</label>
                 <select
                   id="slotNumber"
                   name="slotNumber"
@@ -280,6 +229,8 @@ const ParkingManagementSystem = () => {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </div>
   );
 };
