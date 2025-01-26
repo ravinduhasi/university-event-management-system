@@ -64,9 +64,9 @@ export default function Pricing() {
                   className="object-cover w-32 h-32 mr-4 rounded-md"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold leading-5">{event.eventName}</h3>
-                  <p className="mt-4 text-sm leading-6 text-slate-700">{event.description}</p>
-                  <div className="flex items-start justify-start mt-4">
+                  <h3 className="text-4xl font-semibold leading-5 text-blue-600/100 dark:text-sky-400/100">{event.eventName}</h3>
+                  <p className="mt-4 text-xl leading-6 text-slate-700">{event.description}</p>
+                  <div className="absolute right-10 bottom-15 ">
                     <div className="p-3 rounded-md bg-slate-50 w-[220px] h-[80px] flex items-center justify-center translate-x-180 -translate-y-13">
                       <p className="flex items-center text-sm font-semibold text-slate-500">
                         <span className="ml-2 text-4xl text-slate-900">
