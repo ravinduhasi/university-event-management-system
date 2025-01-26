@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import Navbar from "../../components/Navbar";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserAddForm = ({ onClose }) => {
   const [name, setName] = useState("");
@@ -11,14 +12,10 @@ const UserAddForm = ({ onClose }) => {
   const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("user");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  
+
   const handleAddUser = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-    
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -32,7 +29,7 @@ const UserAddForm = ({ onClose }) => {
         role,
       });
 
-      setSuccess("User added successfully!");
+      toast.success("User added successfully!");
       setName("");
       setEmail("");
       setPassword("");
@@ -40,7 +37,7 @@ const UserAddForm = ({ onClose }) => {
       setPhone("");
       setRole("user");
     } catch (err) {
-      setError(err.message);
+      toast.error(`Error: ${err.message}`);
     }
   };
 
@@ -69,9 +66,6 @@ const UserAddForm = ({ onClose }) => {
 
         <h2 className="mb-6 text-2xl font-bold text-center text-blue-600">Add New User</h2>
 
-        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
-        {success && <p className="mb-4 text-sm text-green-500">{success}</p>}
-
         <form onSubmit={handleAddUser} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
@@ -98,8 +92,6 @@ const UserAddForm = ({ onClose }) => {
               required
             />
           </div>
-
-         
 
           <div>
             <label htmlFor="department" className="block text-sm font-medium text-gray-700">Department</label>
@@ -139,7 +131,6 @@ const UserAddForm = ({ onClose }) => {
               required
             />
           </div>
-          
 
           <div className="flex justify-end space-x-4">
             <button
@@ -158,6 +149,8 @@ const UserAddForm = ({ onClose }) => {
           </div>
         </form>
       </div>
+      {/* Toast container */}
+      <ToastContainer />
     </div>
   );
 };
