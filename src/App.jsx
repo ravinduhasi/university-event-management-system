@@ -17,6 +17,7 @@ import ViewEvents from "./pages/AdminDsh/view-event";
 import UpdateUserTable from "./pages/AdminDsh/update-user";
 import ViewUsers from "./pages/AdminDsh/view-user";
 import HomeTicket from "./pages/price-section/TicketHome";
+import ForgotPassword from "./pages/UserDsh/Reset-Password";
 
 
 
@@ -29,6 +30,7 @@ function App() {
         
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<AuthPage />} />
+        <Route path="/reset-password" element={<ForgotPassword />} />
         <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
         <Route path="/view-manager" element={<ViewManager/>} />
         <Route path="/update-club" element={<UpdateClubForm/>} />
