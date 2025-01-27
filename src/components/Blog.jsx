@@ -13,7 +13,7 @@ const Blog = () => {
                 <div className='container'>
                     <div className='mb-5 text-center max-w-[600px]  mx-auto '>
                         
-                        <p className='text-[45px] font-semibold text-[#073560]'>Club Artical</p>
+                        <p className='px-5 text-4xl font-bold text-black py-15'>Club Artical</p>
                                             
                     </div>
 
