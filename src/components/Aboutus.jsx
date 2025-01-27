@@ -14,9 +14,9 @@ const AboutUs = () => {
             
             <div className="min-h-screen bg-gray-50">
                 {/* Hero Section */}
-                <section className="py-20 text-center text-white bg-gradient-to-r from-blue-800 to-purple-900">
+                <section className="py-20 text-center text-black bg-gradient-to-r from-stone-100 to-neutral-600">
                     <div className="container px-4 mx-auto">
-                        <h1 className="mb-6 text-4xl font-bold md:text-6xl">About Eventaura</h1>
+                        <h1 className="mb-6 text-4xl font-bold md:text-6xl">About EventAura</h1>
                         <p className="mb-8 text-xl md:text-2xl">Your Gateway to University Events and Experiences</p>
                     </div>
                 </section>
