@@ -95,7 +95,7 @@ const Home = () => {
             </div>
             <Blog />
             <div>
-                <h1 className="pt-6 text-4xl font-bold text-center text-black">Booking Your Ticket Now...</h1>
+                <h1 className="text-4xl font-bold text-center text-black pt-11">Booking Your Ticket Now...</h1>
             </div>
             <HTicketHome/>
             
