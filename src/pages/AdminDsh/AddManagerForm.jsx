@@ -39,7 +39,7 @@ const AddManagerForm = ({ onClose }) => {
       }
 
       // Add manager data to Firestore under "users" collection with UID as the document ID
-      await setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, "managers", user.uid), {
         managerId: newManagerId, // Assign custom manager ID
         uid: user.uid, // Store the user's UID for future reference
         name,
