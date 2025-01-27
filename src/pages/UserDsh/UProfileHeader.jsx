@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+
+
 const ProfileHeader = () => {
   const [userData, setUserData] = useState(null);
 
@@ -16,6 +18,11 @@ const ProfileHeader = () => {
     return <div>Loading...</div>;
   }
 
+  const handleResetPassword = () => {
+    window.location.replace('/reset-password');
+
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-6xl min-h-[500px]">
       {/* Left Section: Profile Card */}
@@ -29,6 +36,10 @@ const ProfileHeader = () => {
         <h3 className="mb-2 text-lg font-semibold">{userData.name}</h3>
         <button className="bg-[#27374d] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#1c2d3b] transition">
           Edit Profile
+        </button>
+
+        <button className="bg-[#27374d] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#1c2d3b] transition" onClick={handleResetPassword}>
+          Reset Password
         </button>
       </div>
 
