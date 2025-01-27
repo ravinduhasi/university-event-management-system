@@ -20,6 +20,7 @@ import HomeTicket from "./pages/price-section/TicketHome";
 import ForgotPassword from "./pages/UserDsh/Reset-Password";
 import AboutUs from "./components/Aboutus";
 import ContactUs from "./components/Contactus";
+import Feedback from "./components/Feedback";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/SignUp" element={<AuthPage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/feedback" element={<Feedback />} />
         <Route path="/reset-password" element={<ForgotPassword />} />
         <Route path="/UpdateManager" element={<UpdateManagerForm/>} />
         <Route path="/view-manager" element={<ViewManager/>} />

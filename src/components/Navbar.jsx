@@ -28,8 +28,8 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                    <Link to="/skills" className="block py-2 mt-1 text-lg text-center text-white md:py-0">
-                        Skills
+                    <Link to="/feedback" className="block py-2 mt-1 text-lg text-center text-white md:py-0">
+                        Feedback
                     </Link>
                 </li>
                 <li>
