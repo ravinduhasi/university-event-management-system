@@ -1,5 +1,7 @@
 import React from 'react';
 import home from '../assets/images/samurai.jpg';
+import CST from '../assets/images/CST_LAN.jpg';
+
 
 const Blog = () => {
     return (
@@ -21,7 +23,7 @@ const Blog = () => {
                             
                             <div className='bg-[#ffffff] rounded-lg shadow-2xl h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-[100px] sm:w-[300px] md:w-[200px] lg:w-[400px]'>
                                 <img
-                                    src={home}
+                                    src={CST}
                                     className='h-[250px] w-full object-cover rounded-md transition duration-700 ease-in-out hover:scale-105 cursor-pointer'
                                     alt='Samurai'
                                 />
