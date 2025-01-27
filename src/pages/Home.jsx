@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import image1 from "../assets/image1.jpg";
 import image2 from "../assets/image2.jpg";
 import image3 from "../assets/image3.jpg";
+import image4 from "../assets/image4.jpg";
 import union from "../assets/union.png";
 import leo from "../assets/leo.jpg";
 import rotract from "../assets/rotract.jpg";
@@ -23,6 +24,7 @@ const Home = () => {
         image1,
         image2,
         image3,
+        image4,
     ];
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
