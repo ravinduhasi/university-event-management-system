@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
+import emailjs from "@emailjs/browser"; // Import EmailJS
 import "react-toastify/dist/ReactToastify.css";
 
 const UserAddForm = ({ onClose }) => {
@@ -12,6 +13,8 @@ const UserAddForm = ({ onClose }) => {
   const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("user");
+
+  const formRef = useRef(); // Create form reference for EmailJS
 
   const handleAddUser = async (e) => {
     e.preventDefault();
@@ -28,6 +31,25 @@ const UserAddForm = ({ onClose }) => {
         email,
         role,
       });
+
+      // Send email using EmailJS
+      emailjs
+        .sendForm(
+          "service_iug25ol", // Replace with your service ID
+          "template_k0kiqgj", // Replace with your template ID
+          formRef.current, // Pass the form reference
+          "tHLpli36-HDHgPev8" // Replace with your public key
+        )
+        .then(
+          (response) => {
+            console.log("Email sent successfully:", response);
+            toast.success("User added and email sent successfully!");
+          },
+          (error) => {
+            console.error("Failed to send email:", error);
+            toast.error("User added, but email sending failed.");
+          }
+        );
 
       toast.success("User added successfully!");
       setName("");
@@ -66,12 +88,13 @@ const UserAddForm = ({ onClose }) => {
 
         <h2 className="mb-6 text-2xl font-bold text-center text-blue-600">Add New User</h2>
 
-        <form onSubmit={handleAddUser} className="space-y-4">
+        <form ref={formRef} onSubmit={handleAddUser} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
             <input
               type="text"
               id="name"
+              name="user_name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -85,6 +108,7 @@ const UserAddForm = ({ onClose }) => {
             <input
               type="email"
               id="email"
+              name="user_email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -124,6 +148,7 @@ const UserAddForm = ({ onClose }) => {
             <input
               type="password"
               id="password"
+              name="user_password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
