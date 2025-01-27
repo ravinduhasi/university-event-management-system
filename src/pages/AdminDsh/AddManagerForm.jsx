@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { auth, db } from "../Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddManagerForm = ({ onClose }) => {
@@ -11,6 +12,8 @@ const AddManagerForm = ({ onClose }) => {
   const [name, setName] = useState("");
   const [department, setDepartment] = useState("");
   const [phone, setPhone] = useState("");
+
+  const formRef = useRef(); // Ref for the EmailJS form
 
   const handleAddManager = async (e) => {
     e.preventDefault();
@@ -52,7 +55,26 @@ const AddManagerForm = ({ onClose }) => {
         currentId: newManagerId, // Set the current ID to the newly generated ID
       });
 
-      toast.success("Manager added successfully!");
+      // Send the email using EmailJS
+      emailjs
+        .sendForm(
+          "service_iug25ol", // Replace with your service ID
+          "template_k0kiqgj", // Replace with your template ID
+          formRef.current, // Form reference for dynamic data
+          "tHLpli36-HDHgPev8" // Replace with your public key
+        )
+        .then(
+          (response) => {
+            console.log("Email sent successfully:", response);
+            toast.success("Manager added and email sent successfully!");
+          },
+          (error) => {
+            console.error("Failed to send email:", error);
+            toast.error("Manager added, but email sending failed.");
+          }
+        );
+
+      // Clear form fields
       setEmail("");
       setPassword("");
       setName("");
@@ -90,7 +112,7 @@ const AddManagerForm = ({ onClose }) => {
           Add New Manager
         </h2>
 
-        <form onSubmit={handleAddManager} className="space-y-4">
+        <form ref={formRef} onSubmit={handleAddManager} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Name
@@ -98,6 +120,7 @@ const AddManagerForm = ({ onClose }) => {
             <input
               type="text"
               id="name"
+              name="user_name" // Required for EmailJS
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -113,6 +136,7 @@ const AddManagerForm = ({ onClose }) => {
             <input
               type="email"
               id="email"
+              name="user_email" // Required for EmailJS
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -128,6 +152,7 @@ const AddManagerForm = ({ onClose }) => {
             <input
               type="text"
               id="department"
+              name="department" // Optional for EmailJS
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -143,6 +168,7 @@ const AddManagerForm = ({ onClose }) => {
             <input
               type="text"
               id="phone"
+              name="phone" // Optional for EmailJS
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -158,6 +184,7 @@ const AddManagerForm = ({ onClose }) => {
             <input
               type="password"
               id="password"
+              name="user_password" // Required for EmailJS
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
