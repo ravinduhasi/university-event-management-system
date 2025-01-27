@@ -49,23 +49,23 @@ const EventDetails = () => {
           {event && (
             <div 
               key={event.title} 
-              className={`relative flex flex-col p-8 transition duration-700 ease-in-out border rounded-md shadow-2xl border-slate-200 hover:scale-105 bg-green-100 translate-y-2`}
+              className={'relative flex flex-col p-8 transition duration-700 ease-in-out border rounded-md shadow-2xl border-slate-200 hover:scale-105 bg-green-100 translate-y-2'}
               style={{ width: '24rem', height: '28rem' }}
             >
-              <h3 className='text-lg font-semibold leading-5'>{event.title}</h3>
+              <h3 className='text-4xl font-semibold leading-5'>{event.title}</h3>
               
                
               
-              <p className='mt-4 text-sm leading-6 text-slate-700'>
+              <p className='mt-4 text-xl leading-6 text-slate-700'>
                 {event.description}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pt-4 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 On {event.venue}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
-                at {event.date}
+              <p className='mt-4 text-xl font-semibold leading-6 text-slate-700'>
+                At {event.date}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pb-5 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 {event.time} On words.
               </p>
               <div className='p-3 mt-4 -mx-3 rounded-md bg-slate-50'>
@@ -113,16 +113,16 @@ const EventDetails = () => {
                 </p>
               )}
               
-              <p className='mt-4 text-sm leading-6 text-slate-700'>
+              <p className='mt-4 text-xl leading-6 text-slate-700'>
                 {event.description}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pt-4 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 On {event.venue}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
-                at {event.date}
+              <p className='mt-4 text-xl font-semibold leading-6 text-slate-700'>
+                At {event.date}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pb-5 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 {event.time} On words.
               </p>
               <div className='p-3 mt-4 -mx-3 rounded-md bg-slate-50'>
@@ -164,16 +164,16 @@ const EventDetails = () => {
                 </p>
               )}
               
-              <p className='mt-4 text-sm leading-6 text-slate-700'>
+              <p className='mt-4 text-xl leading-6 text-slate-700'>
                 {event.description}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pt-4 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 On {event.venue}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
-                at {event.date}
+              <p className='mt-4 text-xl font-semibold leading-6 text-slate-700'>
+                At {event.date}
               </p>
-              <p className='mt-4 text-sm font-semibold leading-6 text-slate-700'>
+              <p className='pb-5 mt-4 text-xl font-semibold leading-6 text-slate-700'>
                 {event.time} On words.
               </p>
               <div className='p-3 mt-4 -mx-3 rounded-md bg-slate-50'>
@@ -187,7 +187,7 @@ const EventDetails = () => {
               {/* Call to action */}
               <a 
                 href="#" 
-                className={`mt-4 px-6 py-4 text-sm font-semibold leading-4 shadow-md rounded-md text-center
+                className={`mt-4 px-6 py-4 text-sm font-semibold leading-4 shadow-md rounded-md text-center 
                   ${event.mostPopular 
                     ? 'text-white bg-cyan-500 hover:bg-cyan-600 shadow-md' 
                     : 'text-cyan-700 bg-cyan-50 hover:bg-cyan-100' 
