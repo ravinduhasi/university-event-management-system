@@ -11,8 +11,8 @@ const Footer = () => {
         {/* Contact Info Section */}
         <div className="space-y-2">
           <h4 className="p-1 mb-2 font-bold">Contact Info</h4>
-          <a href="" className="block"><p>+94 766263405</p></a>
-          <a href="" className="block"><p>tharindudilshan6263@gmaill.com</p></a>
+          <a href="" className="block"><p>+94 11 054 1325</p></a>
+          <a href="" className="block"><p>eventaura@uwu.ac.lk</p></a>
           <a href="" className="block"><p>Badulla, Sri Lanka</p></a>
         </div>
 
