@@ -31,10 +31,10 @@ const Blog = () => {
                                 />
                                 <div>
                                     <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>MS Club</h3>
-                                    <p className='pl-2 text-sm text-gray-600 gap-7'> MS Club of Uva Wellassa University Save the Date! We are thrilled to announce the Annual General Meeting of the  MS Club at Uva Wellassa University!  📅 Date:  January 8, 2025 🕛 Time:  05:30 PM Onwards 📍 Venue: TLT Join us for this historic occasion as we take the first step in building a vibrant community that embraces technology, fosters creativity, and empowers leaders of tomorrow.</p>
+                                    <p className='pt-0 pl-2 text-sm text-gray-600 gap-7'> MS Club of Uva Wellassa University Save the Date! We are thrilled to announce the Annual General Meeting of the  MS Club at Uva Wellassa University!  📅 Date:  January 8, 2025 🕛 Time:  05:30 PM Onwards 📍 Venue: TLT Join us for this historic occasion as we take the first step in building a vibrant community that embraces technology.</p>
                                 </div>
                             </div>
-                            
+
                             <div className='bg-[#ffffff] rounded-lg shadow-2xl h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-[100px] sm:w-[300px] md:w-[200px] lg:w-[400px]'>
                                 <img
                                     src={ENM}
@@ -43,7 +43,7 @@ const Blog = () => {
                                 />
                                 <div>
                                     <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>ENM Trophy</h3>
-                                    <p className='pl-2 text-sm text-gray-600 gap-7'> G et ready for the ENM Trophy 2024 Get ready for the ENM Trophy 2024 After 2 years. Its back better than ever ...! Get ready for epic matches,unforgettable moments and cheer for your team... Tomorrow is the day - Let's claim the trophy and bring the energy ! Let the battle begin </p>
+                                    <p className='pl-2 text-sm text-gray-600 gap-7'> G et ready for the ENM Trophy 2024 Get ready for the ENM Trophy 2024 After 2 years. Its back better than ever ...! Get ready for epic matches,unforgettable moments and cheer for your team... </p>
 
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ const Blog = () => {
                                 />
                                 <div>
                                     <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>CST LAN</h3>
-                                    <p className='pl-2 text-sm text-gray-600 gap-7'> We are delighted to invite you to an electrifying DJ Night, organized by the students of the Computer Science and Technology degree program at Uva Wellassa University of Sri Lanka, in celebration of the CST Lan Challenge 2025.Date: 26th January 2025 (Today) Time: From 6.30 PM onwards Venue: MLT Car Park Bring your energy and let’s light up the night together—we can’t wait to see you on the dance floor!</p>
+                                    <p className='pl-2 text-sm text-gray-600 gap-7'> We are delighted to invite you to an electrifying DJ Night, organized by the students of the Computer Science and Technology degree program at Uva Wellassa University of Sri Lanka, in celebration of the CST Lan Challenge 2025.Date: 26th January 2025 Time: From 6.30 PM onwards Venue: MLT Car Park Bring your energy. </p>
                                 </div>
                             </div>
                             
@@ -69,7 +69,7 @@ const Blog = () => {
                                 />
                                 <div>
                                     <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>ICT Get Together</h3>
-                                    <p className='pl-2 text-sm text-gray-600 gap-7'>Infosphere 25 - ICT Get Together Join us for an evening of innovation, connection, and celebration! 📅 Date: January 11  🕔 Time: 5:00 PM  📍 Venue: Crown Regency, Badulla  Come together with industry professionals, tech enthusiasts, and friends for an unforgettable gathering. Let's connect, collaborate, and create lasting memories. Don't miss out—be part of the future of ICT!</p>
+                                    <p className='pl-2 text-sm text-gray-600 gap-7'>Infosphere 25 - ICT Get Together Join us for an evening of innovation, connection, and celebration! 📅 Date: January 11  🕔 Time: 5:00 PM  📍 Venue: Crown Regency, Badulla  Come together with industry professionals, tech enthusiasts, and friends for an unforgettable gathering. Let's connect, collaborate, and create lasting memories.</p>
                                 </div>
                             </div>
 
