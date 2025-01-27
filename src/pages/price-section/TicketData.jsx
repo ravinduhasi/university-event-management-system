@@ -1,5 +1,3 @@
-
-
 export const pricingPlans = [
   {
     title: 'Freelancer',
