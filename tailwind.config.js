@@ -14,6 +14,10 @@ export default {
         '15': '3.75rem', // 15 * 0.25rem
         '20': '5rem',
       },
+      fontFamily: {
+        // Define custom font names
+        sans: ['Poppins', 'sans-serif'],
+      },
        
     },
   },
