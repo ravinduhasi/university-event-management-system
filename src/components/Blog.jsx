@@ -80,7 +80,7 @@ const Blog = () => {
                                     alt='Samurai'
                                 />
                                 <div>
-                                    <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>New Event</h3>
+                                    <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>අමුතු දොස්තර</h3>
                                     <p className='pl-2 text-sm text-gray-600 gap-7'> අමුතු දොස්තරගේ වෙල්ලස්සෙ ආගමනයට... තව දින 03 යි. 
                                         කලා සංගමය මහා ශිෂ්‍ය සංගමය
                                         ඌව වෙල්ලස්ස විශ්වවිද්‍යාල</p>

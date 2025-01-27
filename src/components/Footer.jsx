@@ -27,7 +27,7 @@ const Footer = () => {
         {/* Legal Section */}
         <div className="space-y-4">
           <h4 className="mb-2 font-bold">Legal</h4>
-          <button className="px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700">
+          <button className="px-4 py-2 mt-4 text-white bg-blue-400 rounded hover:bg-blue-700">
             Contact Us
           </button>
 
