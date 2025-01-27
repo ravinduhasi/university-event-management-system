@@ -22,22 +22,22 @@ const Home = () => {
     const sliderContent = [
         {
             image: image1,
-            description: "Welcome to Uva Wellassa University - Where innovation meets excellence in higher education",
+            description: "UWU Hendewa Festival 2024 - Unleashing the spirit of Music",
             alt: "University Main Building"
         },
         {
             image: image2,
-            description: "Discovering new horizons through research and academic excellence",
+            description: "Annual Cultural Festival - Experience the vibrant traditions of University",
             alt: "University Campus Life"
         },
         {
             image: image3,
-            description: "Building tomorrow's leaders through quality education and practical experience",
+            description: "All varieties food demonstrations, cooking, and food innovation challenges await you at UWU AQT Food Fiesta",
             alt: "Student Activities"
         },
         {
             image: image4,
-            description: "Join our vibrant community of learners and innovators",
+            description: "Watch spectacular performances from classical to contemporary at our annual dance championship",
             alt: "University Events"
         }
     ];
