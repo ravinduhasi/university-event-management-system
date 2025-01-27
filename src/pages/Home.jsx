@@ -15,6 +15,7 @@ import Blog from "../components/Blog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import HTicketHome from "./ticket/HTicketHome";
+import Parking from "./UserDsh/Parking";
 
 
 const Home = () => {
@@ -52,7 +53,7 @@ const Home = () => {
             </section>
             <div className="h-[150vh] bg-[#00000017]">
                 <div>
-                    <h1 className="px-5 py-24 font-mono text-4xl font-bold text-center text-black">UNIVERSITY CLUBS...</h1>
+                    <h1 className="px-5 py-24 text-4xl font-bold text-center text-black">UNIVERSITY CLUBS...</h1>
                     <div className="flex justify-center m-12 mt-2 space-x-20">
                         <div className="w-[250px] h-[300px] bg-[#00000025] rounded-[30px] border-2 border-black transition duration-150 hover:scale-105 cursor-pointer">
                             <img src={rotract} alt="Image 1" className="w-full h-full object-cover rounded-[30px]" />
@@ -94,9 +95,11 @@ const Home = () => {
             </div>
             <Blog />
             <div>
-                <h1 className="px-5 py-16 font-mono text-4xl font-bold text-center text-black">Booking Your Ticket Now........ </h1>
+                <h1 className="px-5 py-16 text-4xl font-bold text-center text-black">Booking Your Ticket Now........ </h1>
             </div>
             <HTicketHome/>
+            
+            <Parking/>
             <Footer/>
         </>
     );
