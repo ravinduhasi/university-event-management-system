@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import user1 from "../assets/user1.jpg"; // Add user placeholder images
 import user2 from "../assets/user2.jpg";
-import user3 from "../assets/user3.jpg";
+import user3 from "../assets/image2.jpg";
 
 
 const FeedbackPage = () => {
@@ -16,7 +16,7 @@ const FeedbackPage = () => {
             
             <div className="min-h-screen bg-gray-50">
                 {/* Hero Section */}
-                <section className="py-16 text-white bg-gradient-to-r from-blue-800 to-purple-900">
+                <section className="py-16 text-black bg-gradient-to-r from-stone-100 to-neutral-600">
                     <div className="container px-4 mx-auto text-center">
                         <h1 className="mb-4 text-4xl font-bold md:text-5xl">Share Your Feedback</h1>
                         <p className="text-xl">We value your experience with Eventaura</p>

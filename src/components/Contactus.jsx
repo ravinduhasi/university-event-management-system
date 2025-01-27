@@ -13,7 +13,7 @@ const ContactUs = () => {
             
             <div className="min-h-screen bg-gray-50">
                 {/* Hero Section */}
-                <section className="py-16 text-white bg-gradient-to-r from-blue-800 to-purple-900">
+                <section className="py-16 text-black bg-gradient-to-r from-stone-100 to-neutral-600">
                     <div className="container px-4 mx-auto text-center">
                         <h1 className="mb-4 text-4xl font-bold md:text-5xl">Contact Us</h1>
                         <p className="text-xl">Get in touch with Eventaura team</p>

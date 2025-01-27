@@ -5,6 +5,7 @@ import ENM from '../assets/images/ENM.jpg';
 import MS from '../assets/images/MSCLUB.jpg';
 import ICTGET from '../assets/images/ICTGET.jpg';
 import AMUTHUDOSTHARA from '../assets/images/amuthudosthara.jpg';
+import AKURATA from '../assets/images/akurata.jpg';
 
 const Blog = () => {
     return (
@@ -89,13 +90,16 @@ const Blog = () => {
 
                             <div className='bg-[#ffffff] rounded-lg shadow-2xl h-[350px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-[100px] sm:w-[300px] md:w-[200px] lg:w-[400px]'>
                                 <img
-                                    src={home}
+                                    src={AKURATA}
                                     className='h-[250px] w-full object-cover rounded-md transition duration-700 ease-in-out hover:scale-105 cursor-pointer'
                                     alt='Samurai'
                                 />
                                 <div>
-                                    <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>New Event</h3>
-                                    <p className='pl-2 text-sm text-gray-600 gap-7'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid distinctio, beatae voluptas eius laborum recusandae doloremque minima fugit, pariatur voluptatibus hic perferendis voluptatum iste, quas exercitationem aperiam magnam in numquam.</p>
+                                    <h3 className='font-semibold text-[25px] text-[#06b6d4] p-2'>Akurata Rukulak</h3>
+                                    <p className='pl-2 text-sm text-gray-600 gap-7'>එකතු කරගෙන සරසවියෙන් ආදරය දෙන්නට ගිහින් හෙට දිනනා මල් වලට ක් 2024
+                                        
+                                        හෙට දිනන්න වෙර දරණ පුංචි මල් කැකුළු 67ක් 
+                                        දැඩි ආර්ථික අපහසුතා හා අවම යටිතල පහසුකම් යටතේ පවත්වාගෙන යන, පුංචි මල් කැකුළු ගොඩකගෙන් හැඳුණ ඒ බදුල්ල මලංගමුව විද්‍යාදීප පුංචි ඉස්කෝලෙට ඔක්තෝම්බර් 26 වෙනි දාට අපේ ආදරේ හිතවත්කම අරගෙන යන්න, ඔබත් එකතු වෙන්න.</p>
                                 </div>
                             </div>
 
