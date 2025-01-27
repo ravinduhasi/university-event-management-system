@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import user from '../../assets/user.jpg';
 
 
 const ProfileHeader = () => {
@@ -29,7 +29,7 @@ const ProfileHeader = () => {
       <div className="flex flex-col items-center p-8 border-b border-gray-300 md:border-b-0 md:border-r gap-y-5">
         <h2 className="mb-6 text-xl font-semibold">User PROFILE</h2>
         <img
-          src="https://via.placeholder.com/150"
+          src={user}
           alt="Profile"
           className="w-24 h-24 mb-4 border-4 border-white rounded-full shadow-md"
         />
