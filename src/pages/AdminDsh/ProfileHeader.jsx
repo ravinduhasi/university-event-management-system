@@ -30,6 +30,8 @@ const ProfileHeader = () => {
         <button className="bg-[#27374d] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#1c2d3b] transition">
           Edit Profile
         </button>
+
+        
       </div>
 
       {/* Right Section: Profile Details */}
