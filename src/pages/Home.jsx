@@ -51,7 +51,7 @@ const Home = () => {
                     />
                 </div>
             </section>
-            <div className="h-[150vh] bg-[#00000017]">
+            <div className="h-[150vh] bg-[#7171710b]">
                 <div>
                     <h1 className="px-5 text-4xl font-bold text-center text-black py-15">UNIVERSITY CLUBS...</h1>
                     <div className="flex justify-center m-12 mt-2 space-x-20">
